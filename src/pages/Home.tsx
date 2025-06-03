@@ -46,6 +46,7 @@ const Home: React.FC = () => {
     <PageTransition>
       {/* Hero Section */}
       <div className="w-full h-screen relative overflow-hidden">
+        {/* 3Dの背景 */}
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-black/95 to-black/90">
           <Scene cameraPosition={[0, 0, 4]} controls={false}>
             <Sphere 
@@ -72,7 +73,7 @@ const Home: React.FC = () => {
             className="mb-8"
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter bg-clip-text">
-              これは<span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40">自分の</span>HPです
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/40"></span>Potofolio
             </h1>
           </motion.div>
           
@@ -82,7 +83,7 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            Welcome to my digital space where creativity meets technology.
+            こちらがotoのポートフォリオです。
           </motion.p>
           
           <motion.div
@@ -110,14 +111,14 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black/90" />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div 
-            className="flex items-center gap-4 mb-12"
+            className="flex items-center gap-4 mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Code size={32} className="text-white/80" />
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Profile</h2>
+            {/* <Code size={32} className="text-white/80" /> */}
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Profile</h2>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -127,9 +128,6 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <p className="text-2xl font-light mb-8 text-white/80 leading-relaxed">
-                Crafting digital experiences with modern technologies and creative solutions.
-              </p>
               <Link 
                 to="/profile"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"
@@ -158,14 +156,14 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-bl from-black via-black/95 to-black/90" />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div 
-            className="flex items-center gap-4 mb-12"
+            className="flex items-center gap-4 mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Briefcase size={32} className="text-white/80" />
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Portfolio</h2>
+            {/* <Briefcase size={32} className="text-white/80" /> */}
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Portfolio</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -213,14 +211,14 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/95 to-black/90" />
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div 
-            className="flex items-center gap-4 mb-12"
+            className="flex items-center gap-4 mb-10"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Mail size={32} className="text-white/80" />
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">Contact</h2>
+            {/* <Mail size={32} className="text-white/80" /> */}
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Contact</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -230,9 +228,6 @@ const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <p className="text-2xl font-light mb-8 text-white/80 leading-relaxed">
-                Let's collaborate and bring your ideas to life. Get in touch for exciting opportunities.
-              </p>
               <Link 
                 to="/contact"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white text-white hover:text-black rounded-full transition-all duration-500"

@@ -9,39 +9,57 @@ import { X, Github, ExternalLink } from 'lucide-react';
 const projects = [
   {
     id: 1,
-    title: '3D Product Configurator',
-    description: 'Interactive 3D product configurator built with Three.js and React. Allows users to customize products in real-time.',
-    image: 'https://images.pexels.com/photos/2236382/pexels-photo-2236382.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    technologies: ['React', 'Three.js', 'WebGL', 'TypeScript'],
-    github: 'https://github.com',
-    liveDemo: 'https://example.com',
+    title: 'ドブスニート結婚RTA',
+    description: 'ハッカソンで、お題が「起承転結」だったので、人生をテーマにした結婚をするRTAゲームを作成しました。',
+    image: 'assets/images/dobusu.png',
+    technologies: ['Unity', 'C#', 'github'],
+    github: 'https://github.com/oto1720/2025_jyogi',
+    liveDemo: 'https://topaz.dev/projects/242cef13b3da449a383e',
   },
   {
     id: 2,
-    title: 'E-commerce Website',
-    description: 'Fully responsive e-commerce platform with product filtering, user authentication, and payment integration.',
-    image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe API'],
-    github: 'https://github.com',
+    title: 'Neatify',
+    description: '一人暮らしの部屋の綺麗さをAIが判断し、点数化し共有できるアプリ',
+    image: 'assets/images/neatify.png',
+    technologies: ['Flutter', 'firebase', 'github', 'OpenAI API'],
+    github: 'https://github.com/oto06/room1',
     liveDemo: 'https://example.com',
   },
   {
     id: 3,
-    title: 'Data Visualization Dashboard',
-    description: 'Interactive dashboard displaying complex data sets through various chart types and filterable views.',
-    image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    technologies: ['React', 'D3.js', 'GraphQL', 'Material UI'],
-    github: 'https://github.com',
-    liveDemo: 'https://example.com',
+    title: '作るっちゃんのWEBサイト',
+    description: '所属しているゲーム制作コミュニティー、作るっちゃんのWEBサイトを作成しました。',
+    image: 'assets/images/tukuruttyan.png',
+    technologies: ['React', 'Next.js', 'TypeScript', 'TailwindCSS','supabase','Vercel'],
+    github: 'https://github.com/oto1720/tukurutyaWeb',
+    liveDemo: 'https://tukurutya-web.vercel.app/',
   },
   {
     id: 4,
-    title: 'Mobile Weather App',
-    description: 'Weather application with location detection, forecasts, and animated weather conditions.',
-    image: 'https://images.pexels.com/photos/2448749/pexels-photo-2448749.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    technologies: ['React Native', 'Weather API', 'Geolocation', 'Animations'],
-    github: 'https://github.com',
-    liveDemo: 'https://example.com',
+    title: 'AIこ',
+    description: 'Unity1Weekでのお題で「あい」だったので、AIとあいこを出しつ付けて記録を伸ばすゲームを作成しました。',
+    image: 'assets/images/aiko.png',
+    technologies: ['Unity', 'C#', 'github', ],
+    github: 'https://github.com/oto1720/2025_1week_ai',
+    liveDemo: 'https://unityroom.com/games/aiko',
+  },
+  {
+    id: 5,
+    title: 'もちもちMAKER',
+    description: 'ゲームジャムで、チームで作成しました。（プログラマーとして）',
+    image: 'assets/images/motimoti.png',
+    technologies: ['Unity', 'C#', 'github', ],
+    github: 'https://github.com/oto1720/2025_1week_ai',
+    liveDemo: 'https://unityroom.com/games/motimotimaker',
+  },
+  {
+    id: 6,
+    title: '買ったらダメよ',
+    description: '技育ハッカソンでチームで、買いすぎを防ぐサービスを作成しました。',
+    image: 'assets/images/kattaradame.png',
+    technologies: ['Flutter', 'Google拡張機能', 'OpenAI API', ],
+    github: 'https://github.com/kuroda50/2025_giiku_vol2',
+    liveDemo: 'assets/movie/Clipchamp_1.mov',
   },
 ];
 
@@ -79,9 +97,6 @@ const Portfolio: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Portfolio</h1>
-            <p className="text-xl opacity-70 max-w-2xl mx-auto">
-              A selection of my recent work and personal projects.
-            </p>
           </motion.div>
 
           {/* Projects Grid */}
