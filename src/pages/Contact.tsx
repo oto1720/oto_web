@@ -38,9 +38,9 @@ const Contact: React.FC = () => {
   };
 
   const socialLinks = [
-    { name: 'Email', icon: <Mail size={24} />, url: 'mailto:your.email@example.com' },
-    { name: 'GitHub', icon: <Github size={24} />, url: 'https://github.com' },
-    { name: 'Twitter', icon: <Twitter size={24} />, url: 'https://twitter.com' },
+    { name: 'Email', icon: <Mail size={24} />, url: 'mailto:kotaro17206@gmail.com' },
+    { name: 'GitHub', icon: <Github size={24} />, url: 'https://github.com/oto1720' },
+    { name: 'Twitter', icon: <Twitter size={24} />, url: 'https://x.com/ot6217' },
     { name: 'LinkedIn', icon: <Linkedin size={24} />, url: 'https://linkedin.com' },
   ];
 
