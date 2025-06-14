@@ -20,28 +20,44 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }).toString()
+      });
       
-      // Reset the submitted state after 5 seconds
-      setTimeout(() => {
-        setSubmitted(false);
-      }, 5000);
-    }, 1500);
+      if (response.ok) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+        
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setIsSubmitting(false);
+      alert('メッセージの送信に失敗しました。もう一度お試しください。');
+    }
   };
 
   const socialLinks = [
     { name: 'Email', icon: <Mail size={24} />, url: 'mailto:kotaro17206@gmail.com' },
     { name: 'GitHub', icon: <Github size={24} />, url: 'https://github.com/oto1720' },
     { name: 'Twitter', icon: <Twitter size={24} />, url: 'https://x.com/ot6217' },
-    { name: 'LinkedIn', icon: <Linkedin size={24} />, url: 'https://linkedin.com' },
   ];
 
   return (
@@ -64,9 +80,6 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Contact</h1>
-            <p className="text-xl opacity-70 max-w-2xl mx-auto">
-              Let's connect. Feel free to reach out for collaborations or just a friendly chat.
-            </p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -98,7 +111,7 @@ const Contact: React.FC = () => {
                     <div>
                       <h3 className="text-lg font-medium">{link.name}</h3>
                       <p className="text-sm text-white/70">
-                        {link.name === 'Email' ? 'your.email@example.com' : `@yourhandle`}
+                        {link.name === 'Email' ? 'kotaro17206@gmail.com' : link.url}
                       </p>
                     </div>
                   </motion.a>
@@ -115,7 +128,21 @@ const Contact: React.FC = () => {
             >
               <h2 className="text-2xl font-semibold mb-6">Send a Message</h2>
               
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                ref={formRef} 
+                name="contact" 
+                method="POST" 
+                data-netlify="true" 
+                data-netlify-honeypot="bot-field"
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <div style={{ display: 'none' }}>
+                  <label>
+                    Don't fill this out if you're human: <input name="bot-field" />
+                  </label>
+                </div>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name
