@@ -61,6 +61,15 @@ const projects = [
     github: 'https://github.com/kuroda50/2025_giiku_vol2',
     liveDemo: 'assets/movie/Clipchamp_1.mov',
   },
+  {
+    id: 7,
+    title: '俺２',
+    description: '俺と理想の俺2が会話するアプリ',
+    image: '/assets/images/ore2.png',
+    technologies: ['Flutter', 'Python','Flask', 'OpenAI API', ],
+    github: 'https://github.com/kuroda50/ai_my',
+    liveDemo: 'https://topaz.dev/projects/63b8bd917b65b4f91601',
+  }
 ];
 
 const Portfolio: React.FC = () => {

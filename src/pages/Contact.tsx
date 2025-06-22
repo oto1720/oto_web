@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import Scene from '../components/three/Scene';
 import SpinningCube from '../components/three/SpinningCube';
-import { Mail, Github, Twitter, Linkedin, Send } from 'lucide-react';
+import { Mail, Github, Twitter,  Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
