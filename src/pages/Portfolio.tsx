@@ -69,6 +69,15 @@ const projects = [
     technologies: ['Flutter', 'Python','Flask', 'OpenAI API', ],
     github: 'https://github.com/kuroda50/ai_my',
     liveDemo: 'https://topaz.dev/projects/63b8bd917b65b4f91601',
+  },
+  {
+    id: 8,
+    title: 'AmazonQCLIのゲーム',
+  description: 'AmazonQCLIを使ってゲームを作るとTシャツがもらえるキャンペーンに参加しました',
+    image: '/assets/images/amazonqcli.png',
+    technologies: ['React', 'There.js','Typescript', 'AmazonQCLI', ],
+    github: 'https://github.com/oto1720/AmazonQCLI.git',
+    liveDemo: 'https://amazon-qcli.vercel.app/',
   }
 ];
 
