@@ -3,9 +3,40 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Scene from '../components/three/Scene';
 import Sphere from '../components/three/Sphere';
-import FloatingText from '../components/three/FloatingText';
+//import FloatingText from '../components/three/FloatingText';
 import PageTransition from '../components/PageTransition';
 import { ArrowDown, ArrowRight, Code, Briefcase, Mail } from 'lucide-react';
+
+// Sample portfolio data - import from portfolio.tsx
+const projects = [
+  {
+    id: 1,
+    title: 'ドブスニート結婚RTA',
+    description: 'ハッカソンで、お題が「起承転結」だったので、人生をテーマにした結婚をするRTAゲームを作成しました。',
+    image: '/assets/images/dobusu.png',
+    technologies: ['Unity', 'C#', 'github'],
+    github: 'https://github.com/oto1720/2025_jyogi',
+    liveDemo: 'https://topaz.dev/projects/242cef13b3da449a383e',
+  },
+  {
+    id: 2,
+    title: 'Neatify',
+    description: '一人暮らしの部屋の綺麗さをAIが判断し、点数化し共有できるアプリ',
+    image: '/assets/images/neatify.png',
+    technologies: ['Flutter', 'firebase', 'github', 'OpenAI API'],
+    github: 'https://github.com/oto06/room1',
+    liveDemo: 'https://example.com',
+  },
+  {
+    id: 3,
+    title: '作るっちゃんのWEBサイト',
+    description: '所属しているゲーム制作コミュニティー、作るっちゃんのWEBサイトを作成しました。',
+    image: '/assets/images/tukuruttyan.png',
+    technologies: ['React', 'Next.js', 'TypeScript', 'TailwindCSS','supabase','Vercel'],
+    github: 'https://github.com/oto1720/tukurutyaWeb',
+    liveDemo: 'https://tukurutya-web.vercel.app/',
+  },
+];
 
 const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -167,26 +198,46 @@ const Home: React.FC = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {[1, 2, 3].map((item) => (
-              <motion.div 
-                key={item}
-                className="group relative aspect-video bg-white/5 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-500"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: item * 0.1 }}
-                whileHover={{ scale: 1.02 }}
+            {projects.map((project, index) => (
+              <Link
+                key={project.id}
+                to="/portfolio"
+                className="block"
               >
+                <motion.div 
+                  className="group relative aspect-video bg-white/5 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-500 cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <span className="text-white font-medium transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                    Project {item}
+                <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-500 p-4">
+                  <span className="text-white font-medium text-lg mb-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                    {project.title}
                   </span>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {project.technologies.slice(0, 2).map((tech, i) => (
+                      <span 
+                        key={i}
+                        className="px-2 py-1 text-xs bg-white/20 rounded-full text-white/90"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-white/40">Project {item}</span>
+                <div className="w-full h-full flex items-center justify-center group-hover:opacity-0 transition-opacity duration-500">
+                  <span className="text-white/60 text-lg font-medium">{project.title}</span>
                 </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
 
