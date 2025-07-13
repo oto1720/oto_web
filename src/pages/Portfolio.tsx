@@ -23,7 +23,7 @@ const projects = [
     image: '/assets/images/neatify.png',
     technologies: ['Flutter', 'firebase', 'github', 'OpenAI API'],
     github: 'https://github.com/oto06/room1',
-    liveDemo: 'https://example.com',
+    liveDemo: 'https://apps.apple.com/jp/app/neatify/id6746064755',
   },
   {
     id: 3,
