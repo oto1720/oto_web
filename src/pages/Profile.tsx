@@ -75,7 +75,7 @@ const experiences = [
     id: 8,
     title: '２回目のゲームジャム参加',
     institution: '',
-    period: '2024 2月',
+    period: '2025 2月',
     description: '２回目となるゲームジャムに参加し、プログラムリーダーを務める',
     icon: <Circle size={24} />,
   },
@@ -83,18 +83,26 @@ const experiences = [
     id: 9,
     title: 'つくると参加',
     institution: '',
-    period: '2024 2月',
-    description: '工学系のイベントで、制作物を展示',
+    period: '2025 2月',
+    description: '工学系のイベントで、制作物を展示（チャレキャラで作成した作品を発表）',
     icon: <Circle size={24} />,
   },
   {
     id: 10,
     title: '技育ハッカソン参加',
     institution: '',
-    period: '2024 4月',
-    description: '初めてのハッカソンに参加。チームで賞を受賞',
+    period: '2025 4月',
+    description: '初めてのハッカソンに参加。チームで賞を受賞（フロントエンドを担当）',
     icon: <Circle size={24} />,
   },
+  {
+    id: 11,
+    title: 'ハックツハッカソン',
+    institution: '',
+    period: '2025 6月',
+    description: 'aiを使った作品でWingArc1st賞を獲得。（フロントエンドを担当）',
+    icon: <Circle size={24} />,
+  }
 ];
 
 const Profile: React.FC = () => {
