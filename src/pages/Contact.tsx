@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import PageTransition from '../components/PageTransition';
-import Scene from '../components/three/Scene';
-import SpinningCube from '../components/three/SpinningCube';
-import { Mail, Github, Twitter,  Send } from 'lucide-react';
+import { motion } from 'framer-motion'; //アニメーション効果を追加するライブラリ
+import PageTransition from '../components/PageTransition'; //ページ遷移アニメーションのカスタムコンポーネント
+import Scene from '../components/three/Scene'; 
+import SpinningCube from '../components/three/SpinningCube'; 
+import { Mail, Github, Twitter,  Send } from 'lucide-react'; //アイコンライブラリ
+import emailjs from '@emailjs/browser';
 
+//stateの管理
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -15,28 +17,32 @@ const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
+//入力フィールドの値が変更された時formDataを更新
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'contact',
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
-        }).toString()
-      });
+      // EmailJSを使用してメールを送信
+      const result = await emailjs.send(
+        'YOUR_SERVICE_ID', // EmailJSのサービスID
+        'YOUR_TEMPLATE_ID', // EmailJSのテンプレートID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Kotaro', // 受信者名
+        },
+        'YOUR_PUBLIC_KEY' // EmailJSの公開キー
+      );
       
-      if (response.ok) {
+      if (result.status === 200) {
         setIsSubmitting(false);
         setSubmitted(true);
         setFormData({ name: '', email: '', message: '' });
@@ -45,7 +51,7 @@ const Contact: React.FC = () => {
           setSubmitted(false);
         }, 5000);
       } else {
-        throw new Error('Network response was not ok');
+        throw new Error('EmailJS error');
       }
     } catch (error) {
       console.error('Error sending message:', error);
@@ -130,19 +136,9 @@ const Contact: React.FC = () => {
               
               <form 
                 ref={formRef} 
-                name="contact" 
-                method="POST" 
-                data-netlify="true" 
-                data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit} 
                 className="space-y-6"
               >
-                <input type="hidden" name="form-name" value="contact" />
-                <div style={{ display: 'none' }}>
-                  <label>
-                    Don't fill this out if you're human: <input name="bot-field" />
-                  </label>
-                </div>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name
