@@ -6,6 +6,17 @@ import SpinningCube from '../components/three/SpinningCube';
 import { Code, Briefcase, GraduationCap, Circle } from 'lucide-react';
 
 // Sample profile data - replace with your actual data
+type Experience = {
+  id: number;
+  title: string;
+  subtitle?: string;
+  institution?: string;
+  period: string;
+  description: string;
+  icon: JSX.Element;
+  image?: string; // optional image path (e.g. "/assets/images/xxx.png")
+  link?: string;  // optional external link; card becomes clickable when set
+};
 const skills = [
   { name: 'Flutter', level: 70 },
   { name: 'React', level: 40 },
@@ -14,7 +25,7 @@ const skills = [
   { name: 'Next.js', level: 40 },
 ];
 
-const experiences = [
+const experiences: Experience[] = [
   {
     id: 1,
     title: '福岡大学入学',
@@ -51,6 +62,7 @@ const experiences = [
     id: 5,
     title: '初めてのゲームジャムに参加',
     institution: '',
+    image: '/assets/images/gejam1.jpg',
     period: '2024 8月',
     description: '福岡の学生を対象とした、ゲーム制作を行うジャムに参加',
     icon: <Circle size={24} />,
@@ -67,6 +79,7 @@ const experiences = [
     id: 7,
     title: 'チャレキャラの発表',
     institution: '',
+    image: '/assets/images/tyarekyara.jpg',
     period: '2024 12月',
     description: '遊びと学びを題材にしたマッチングアプリの発表を行なった',
     icon: <Circle size={24} />,
@@ -74,14 +87,17 @@ const experiences = [
   {
     id: 8,
     title: '２回目のゲームジャム参加',
+
     institution: '',
     period: '2025 2月',
+    image: '/assets/images/gejam2.jpg',
     description: '２回目となるゲームジャムに参加し、プログラムリーダーを務める',
     icon: <Circle size={24} />,
   },
   {
     id: 9,
     title: 'つくると参加',
+    image: '/assets/images/tukuruto.jpg',
     institution: '',
     period: '2025 2月',
     description: '工学系のイベントで、制作物を展示（チャレキャラで作成した作品を発表）',
@@ -98,6 +114,8 @@ const experiences = [
   {
     id: 12,
     title: 'アプリをリリース',
+    image: '/assets/images/neatify.png',
+    link: 'https://apps.apple.com/jp/app/neatify/id6746064755',
     institution: '',
     period: '2025 5月',
     description: '個人開発を行っていた、部屋掃除管理アプリをリリース',
@@ -107,6 +125,7 @@ const experiences = [
     id: 13,
     title: 'ハックツハッカソン',
     institution: '',
+    image: '/assets/images/hakkaso.jpg',
     period: '2025 6月',
     description: 'aiを使った作品でWingArc1st賞を獲得。（フロントエンドを担当）',
     icon: <Circle size={24} />,
@@ -123,6 +142,7 @@ const experiences = [
     id: 15,
     title: 'CyberAgentさんとサークルのイベントを主催',
     institution: '',
+    image: '/assets/images/cahakkaso.jpg',
     period: '2025 8月',
     description: '人のプロダクトをブラッシュアップするハッカソンイベントを主催(優秀賞獲得）',
     icon: <Circle size={24} />,
@@ -131,6 +151,7 @@ const experiences = [
     id: 16,
     title: '学生展示会CPQの運営、開催',
     institution: '',
+    image: '/assets/images/CPQ.jpg',
     period: '2025 8月',
     description: '学生団体対象とした展示会の運営を行った。所属サークルも展示',
     icon: <Circle size={24} />,
@@ -261,12 +282,40 @@ const Profile: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="ml-16 md:ml-0 bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300">
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
-                    <p className="text-white/70 mb-2">{item.subtitle || item.institution}</p>
-                    <p className="text-sm text-white/50 mb-4">{item.period}</p>
-                    <p className="text-base">{item.description}</p>
-                  </div>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block ml-16 md:ml-0 bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+                    >
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-40 object-cover rounded-md mb-4"
+                        />
+                      )}
+                      <h3 className="text-xl font-semibold">{item.title}</h3>
+                      <p className="text-white/70 mb-2">{item.subtitle || item.institution}</p>
+                      <p className="text-sm text-white/50 mb-4">{item.period}</p>
+                      <p className="text-base">{item.description}</p>
+                    </a>
+                  ) : (
+                    <div className="ml-16 md:ml-0 bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300">
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-40 object-cover rounded-md mb-4"
+                        />
+                      )}
+                      <h3 className="text-xl font-semibold">{item.title}</h3>
+                      <p className="text-white/70 mb-2">{item.subtitle || item.institution}</p>
+                      <p className="text-sm text-white/50 mb-4">{item.period}</p>
+                      <p className="text-base">{item.description}</p>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
