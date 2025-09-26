@@ -78,7 +78,35 @@ const projects = [
     technologies: ['React', 'There.js','Typescript', 'AmazonQCLI', ],
     github: 'https://github.com/oto1720/AmazonQCLI.git',
     liveDemo: 'https://amazon-qcli.vercel.app/',
+  },
+  {
+    id: 9,
+    title: '就活戦士',
+  description: '就活のためのタスクアプリを作成しました',
+    image: '/assets/images/shuukatu.png',
+    technologies: ['Flutter', 'RiverPod','Github',],
+    github: 'https://github.com/9970628/syuukatusensi',
+    liveDemo: 'https://amazon-qcli.vercel.app/',
+  },
+  {
+    id: 10,
+    title: 'ReadMaker',
+  description: '速読用のアプリで文字がパラパラと流れ読書ができるもの',
+    image: '/assets/images/readmaker.png',
+    technologies: ['Expo', 'React Native','Rust','Docker','PostgreSQL',],
+    github: 'https://github.com/oto1720/2025_ReadMaker',
+    liveDemo: 'https://www.canva.com/design/DAGwSL5s78M/OcWyrOiquL0TaNtNmirHfw/edit',
+  },
+  {
+    id: 11,
+    title: '福大ピアプロのwebサイト',
+  description: '福大ピアプロのwebサイトを作成しました',
+    image: '/assets/images/hukudai.png',
+    technologies: ['Next.js', 'TypeScript','TailwindCSS','GAS',],
+    github: 'https://github.com/oto1720/piapuro-web',
+    liveDemo: 'https://www.piapuro.net/',
   }
+  
 ];
 
 const Portfolio: React.FC = () => {
@@ -119,7 +147,7 @@ const Portfolio: React.FC = () => {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
+            {[...projects].sort((a, b) => b.id - a.id).map((project, index) => (
               <motion.div
                 key={project.id}
                 className="group relative bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden cursor-pointer hover:bg-white/10 transition-all duration-300"

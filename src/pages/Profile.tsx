@@ -7,11 +7,11 @@ import { Code, Briefcase, GraduationCap, Circle } from 'lucide-react';
 
 // Sample profile data - replace with your actual data
 const skills = [
-  { name: 'Flutter', level: 60 },
-  { name: 'React', level: 50 },
+  { name: 'Flutter', level: 70 },
+  { name: 'React', level: 40 },
   { name: 'Unity,C#', level: 60 },
-  { name: 'TypeScript', level: 80 },
-  { name: 'Next.js', level: 50 },
+  { name: 'TypeScript', level: 40 },
+  { name: 'Next.js', level: 40 },
 ];
 
 const experiences = [
@@ -96,11 +96,59 @@ const experiences = [
     icon: <Circle size={24} />,
   },
   {
-    id: 11,
+    id: 12,
+    title: 'アプリをリリース',
+    institution: '',
+    period: '2025 5月',
+    description: '個人開発を行っていた、部屋掃除管理アプリをリリース',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 13,
     title: 'ハックツハッカソン',
     institution: '',
     period: '2025 6月',
     description: 'aiを使った作品でWingArc1st賞を獲得。（フロントエンドを担当）',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 14,
+    title: 'CyberAgentさんのMCPについて講演参加',
+    institution: '',
+    period: '2025 7月',
+    description: 'CA.ai MCPについての勉強会に参加',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 15,
+    title: 'CyberAgentさんとサークルのイベントを主催',
+    institution: '',
+    period: '2025 8月',
+    description: '人のプロダクトをブラッシュアップするハッカソンイベントを主催(優秀賞獲得）',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 16,
+    title: '学生展示会CPQの運営、開催',
+    institution: '',
+    period: '2025 8月',
+    description: '学生団体対象とした展示会の運営を行った。所属サークルも展示',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 17,
+    title: 'サークル代表就任',
+    institution: '',
+    period: '2025 9月',
+    description: '所属サークル、福大ピアプロの代表に就任',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 18,
+    title: 'RiverPodの講座を開く',
+    institution: '',
+    period: '2025 10月',
+    description: 'エンジニアカフェでRiverPodについてのハンズオン講座を開いた',
     icon: <Circle size={24} />,
   }
 ];
