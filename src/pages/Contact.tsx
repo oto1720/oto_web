@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'; //アニメーション効果を追加�
 import PageTransition from '../components/PageTransition'; //ページ遷移アニメーションのカスタムコンポーネント
 import Scene from '../components/three/Scene'; 
 import SpinningCube from '../components/three/SpinningCube'; 
-import { Mail, Github, Twitter,  Send } from 'lucide-react'; //アイコンライブラリ
+import { Mail, Github, Twitter, Send, Link2 } from 'lucide-react'; //アイコンライブラリ
 import emailjs from '@emailjs/browser';
 
 //stateの管理
@@ -63,6 +63,7 @@ const Contact: React.FC = () => {
   const socialLinks = [
     { name: 'Email', icon: <Mail size={24} />, url: 'mailto:kotaro17206@gmail.com' },
     { name: 'GitHub', icon: <Github size={24} />, url: 'https://github.com/oto1720' },
+    { name: 'Qiita', icon: <Link2 size={24} />, url: 'https://qiita.com/oto1720' },
     { name: 'Twitter', icon: <Twitter size={24} />, url: 'https://x.com/ot6217' },
   ];
 
