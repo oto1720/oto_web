@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import Scene from '../components/three/Scene';
@@ -166,10 +166,47 @@ const experiences: Experience[] = [
   },
   {
     id: 18,
+    title: '学生団体交流会参加',
+    institution: '',
+    image: '/assets/images/giiku.jpg',
+    period: '2025 10月',
+    description: '全国のエンジニア学生団体と交流',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 19,
     title: 'RiverPodの講座を開く',
     institution: '',
+    image: '/assets/images/kouenn.png',
     period: '2025 10月',
     description: 'エンジニアカフェでRiverPodについてのハンズオン講座を開いた',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 20,
+    title: 'Flutterkaigi2025に参加',
+    institution: '',
+    image: '/assets/images/flutterkaigi.jpg',
+    period: '2025 10月',
+    description: 'Flutterのカンファレンスに参加',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 21,
+    title: 'チャレキャラ2025に参加',
+    institution: '',
+    image: '/assets/images/tyarekyara2.jpg',
+    period: '2025 12月',
+    description: 'チャレキャラ2025に参加し、企業賞を獲得',
+    icon: <Circle size={24} />,
+  },
+  {
+    id: 22,
+    title: '株式会社dipさんとのLT会を主催',
+    institution: '',
+    image: '/assets/images/dip.jpg',
+    period: '2025 12月',
+    description: '株式会社dipさんとのLT会を主催',
     icon: <Circle size={24} />,
   }
 ];
@@ -261,8 +298,7 @@ const Profile: React.FC = () => {
               <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-white/20" />
 
               {/* Timeline items */}
-              {experiences
-              .sort((a,b) => b.id - a.id)
+              {useMemo(() => experiences.slice().sort((a,b) => b.id - a.id), [])
               .map((item, index) => (
                 <motion.div 
                   key={item.id}
@@ -293,6 +329,8 @@ const Profile: React.FC = () => {
                         <img
                           src={item.image}
                           alt={item.title}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-40 object-cover rounded-md mb-4"
                         />
                       )}
@@ -307,6 +345,8 @@ const Profile: React.FC = () => {
                         <img
                           src={item.image}
                           alt={item.title}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-40 object-cover rounded-md mb-4"
                         />
                       )}

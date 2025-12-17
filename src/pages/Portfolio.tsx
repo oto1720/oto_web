@@ -105,6 +105,15 @@ const projects = [
     technologies: ['Next.js', 'TypeScript','TailwindCSS','GAS',],
     github: 'https://github.com/oto1720/piapuro-web',
     liveDemo: 'https://www.piapuro.net/',
+  },
+  {
+    id: 12,
+    title: 'Critica',
+  description: 'エコーチェンバーを壊す多角的思考育成アプリ',
+    image: '/assets/images/Critica.png',
+    technologies: ['Flutter', 'Firebase','GeminiAI',],
+    github: '',
+    liveDemo: 'https://apps.apple.com/jp/app/critica/id6756059095',
   }
   
 ];
