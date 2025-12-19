@@ -168,9 +168,11 @@ const Portfolio: React.FC = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
-                  <img 
-                    src={project.image} 
+                  <img
+                    src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300" />
@@ -233,9 +235,11 @@ const Portfolio: React.FC = () => {
                   </button>
                   
                   <div className="relative aspect-w-16 aspect-h-9">
-                    <img 
-                      src={selectedProject.image} 
+                    <img
+                      src={selectedProject.image}
                       alt={selectedProject.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-64 object-cover object-center"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />

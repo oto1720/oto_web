@@ -1,19 +1,35 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+
+// Throttle helper function
+const throttle = <T extends (...args: any[]) => void>(
+  func: T,
+  limit: number
+): ((...args: Parameters<T>) => void) => {
+  let inThrottle: boolean;
+  return function (this: any, ...args: Parameters<T>) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+};
 
 const Cursor: React.FC = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [linkHovered, setLinkHovered] = useState(false);
-  
+
   const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    // Throttled mouse move handler - updates every 16ms (~60fps)
+    const handleMouseMove = throttle((e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       if (hidden) setHidden(false);
-    };
+    }, 16);
 
     const handleMouseDown = () => setClicked(true);
     const handleMouseUp = () => setClicked(false);

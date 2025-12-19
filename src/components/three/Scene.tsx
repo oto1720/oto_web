@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
@@ -16,28 +16,52 @@ const Scene: React.FC<SceneProps> = ({
   controls = true,
   background = '#000000',
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <Canvas
-      shadows
-      dpr={[1, 2]}
-      gl={{ antialias: true }}
-      className="w-full h-full"
-      style={{ background }}
-    >
-      <PerspectiveCamera makeDefault position={cameraPosition} fov={75} />
-      <color attach="background" args={[background]} />
-      <ambientLight intensity={0.5} />
-      <directionalLight 
-        position={[10, 10, 5]} 
-        intensity={1} 
-        castShadow 
-        shadow-mapSize-width={1024} 
-        shadow-mapSize-height={1024} 
-      />
-      <MouseFollowLight />
-      {children}
-      {controls && <OrbitControls enableZoom={false} enablePan={false} />}
-    </Canvas>
+    <div ref={containerRef} className="w-full h-full">
+      {isVisible && (
+        <Canvas
+          shadows
+          dpr={[1, 2]}
+          gl={{ antialias: true }}
+          className="w-full h-full"
+          style={{ background }}
+        >
+          <PerspectiveCamera makeDefault position={cameraPosition} fov={75} />
+          <color attach="background" args={[background]} />
+          <ambientLight intensity={0.5} />
+          <directionalLight
+            position={[10, 10, 5]}
+            intensity={1}
+            castShadow
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+          />
+          <MouseFollowLight />
+          {children}
+          {controls && <OrbitControls enableZoom={false} enablePan={false} />}
+        </Canvas>
+      )}
+    </div>
   );
 };
 
