@@ -38,7 +38,7 @@ const experiences: Experience[] = [
     id: 2,
     title: '福大ピアプロ入部',
     subtitle: '',
-    period: '2024　4月',
+    period: '2024  4月',
     description: '福岡大学のプログラミングサークル、ピアプロに入部',
     icon: <Circle size={24} />,
   },
@@ -307,8 +307,8 @@ const Profile: React.FC = () => {
                   } md:w-1/2`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  viewport={{ once: true, margin: "200px" }}
+                  transition={{ duration: 0.5 }}
                 >
                   {/* Timeline node */}
                   <div className={`absolute ${
