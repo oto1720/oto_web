@@ -208,6 +208,15 @@ const experiences: Experience[] = [
     period: '2025 12月',
     description: '株式会社dipさんとのLT会を主催',
     icon: <Circle size={24} />,
+  },
+  {
+    id: 23,
+    title: '技育キャンプvol17に参加',
+    institution: '',
+    image: '/assets/images/giiku.png',
+    period: '2026 1月',
+    description: 'AIを使ったマッチングアプリを作成し、優秀賞を獲得',
+    icon: <Circle size={24} />,
   }
 ];
 

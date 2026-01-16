@@ -114,6 +114,15 @@ const projects = [
     technologies: ['Flutter', 'Firebase','GeminiAI',],
     github: '',
     liveDemo: 'https://apps.apple.com/jp/app/critica/id6756059095',
+  },
+  {
+    id: 13,
+    title: 'AIを使ったマッチングアプリ(mirr)',
+    description: '技育キャンプvol17で作成した、AIを使ったマッチングアプリ',
+    image: '/assets/images/giiku.png',
+    technologies: ['Flutter', 'Echo(Go)','Firebase','Swagger','GeminiAPI','Docker','Neon',],
+    github: 'https://github.com/hackathon-20260110/app_pub',
+    liveDemo: 'https://drive.google.com/file/d/10rYh6ORxTrSG7dzlC-oskU0iFMgFFG68/view',
   }
   
 ];
