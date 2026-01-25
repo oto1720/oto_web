@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/profile', label: 'Profile' },
-    { path: '/portfolio', label: 'Portfolio' },
+    { path: '/portfolio', label: 'Works' },
     { path: '/contact', label: 'Contact' }
   ];
 
@@ -60,9 +60,6 @@ const Navigation: React.FC = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <NavLink to="/" className="text-white font-semibold text-xl">
             <span className="sr-only">Homepage</span>
-            <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
-              HP
-            </div>
           </NavLink>
 
           {/* Desktop Navigation */}

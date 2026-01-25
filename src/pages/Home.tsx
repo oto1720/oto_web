@@ -194,7 +194,7 @@ const Home: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             {/* <Briefcase size={32} className="text-white/80" /> */}
-            <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Portfolio</h2>
+            <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Works</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">

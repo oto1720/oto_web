@@ -18,11 +18,18 @@ type Experience = {
   link?: string;  // optional external link; card becomes clickable when set
 };
 const skills = [
-  { name: 'Flutter', level: 70 },
-  { name: 'React', level: 40 },
-  { name: 'Unity,C#', level: 60 },
-  { name: 'TypeScript', level: 40 },
+  { name: 'Flutter', level: 50 },
+  { name: 'GitHub', level: 50 },
   { name: 'Next.js', level: 40 },
+  { name: 'React', level: 30 },
+  { name: 'Unity', level: 30 },
+  { name: 'Docker', level: 30 },
+  { name: 'Dart', level: 50 },
+  { name: 'TypeScript', level: 40 },
+  { name: 'Swift', level: 30 },
+  { name: 'Python', level: 20 },
+  { name: 'C#', level: 30 },
+  { name: 'Go', level: 20 },
 ];
 
 const experiences: Experience[] = [
