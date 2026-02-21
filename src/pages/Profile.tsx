@@ -15,12 +15,34 @@ type Experience = {
   link?: string;
 };
 
-const skills = [
-  'Flutter', 'Dart', 'GitHub',
-  'Next.js', 'React', 'TypeScript',
-  'Unity', 'C#', 'Docker',
-  'Swift', 'Python', 'Go',
+type SkillLevel = 'Advanced' | 'Intermediate' | 'Beginner';
+
+type Skill = {
+  name: string;
+  image?: string;
+  level: SkillLevel;
+};
+
+const skills: Skill[] = [
+  { name: 'Flutter',     image: '/assets/images/flutter.png', level: 'Advanced' },
+  { name: 'Dart',        image: '/assets/images/dart.png',    level: 'Advanced' },
+  { name: 'Swift',       image: '/assets/images/swift.png',   level: 'Advanced' },
+  { name: 'Next.js',     image: '/assets/images/next.png',    level: 'Intermediate' },
+  { name: 'React',                                            level: 'Intermediate' },
+  { name: 'TypeScript',  image: '/assets/images/ts.png',      level: 'Intermediate' },
+  { name: 'GitHub',      image: '/assets/images/github.jpg',  level: 'Intermediate' },
+  { name: 'Unity',                                            level: 'Beginner' },
+  { name: 'C#',                                               level: 'Beginner' },
+  { name: 'Docker',      image: '/assets/images/docker.jpeg',  level: 'Beginner' },
+  { name: 'Python',                                           level: 'Beginner' },
+  { name: 'Go',          image: '/assets/images/go.png',      level: 'Beginner' },
 ];
+
+const levelConfig: Record<SkillLevel, { label: string; className: string }> = {
+  Advanced:     { label: 'Advanced',     className: 'bg-[var(--color-accent)] text-white' },
+  Intermediate: { label: 'Intermediate', className: 'bg-blue-500 text-white' },
+  Beginner:     { label: 'Beginner',     className: 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)]' },
+};
 
 const experiences: Experience[] = [
   {
@@ -228,19 +250,38 @@ const Profile: React.FC = () => {
               Skills
             </h2>
 
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill, index) => (
-                <motion.span
-                  key={skill}
-                  className="px-4 py-2 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] rounded-full text-sm font-medium hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors duration-300"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                >
-                  {skill}
-                </motion.span>
-              ))}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+              {skills.map((skill, index) => {
+                const { label, className } = levelConfig[skill.level];
+                return (
+                  <motion.div
+                    key={skill.name}
+                    className="flex flex-col items-center gap-2 p-4 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-accent)] transition-colors duration-300"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    {skill.image ? (
+                      <img
+                        src={skill.image}
+                        alt={skill.name}
+                        className="w-12 h-12 object-contain rounded-lg"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-lg bg-[var(--color-bg)] flex items-center justify-center text-[var(--color-text-muted)] text-xl font-bold">
+                        {skill.name.slice(0, 2)}
+                      </div>
+                    )}
+                    <span className="text-[var(--color-text)] text-xs font-medium text-center leading-tight">
+                      {skill.name}
+                    </span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${className}`}>
+                      {label}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.section>
 
