@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../hooks/useTheme';
 
 const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
-  // Close menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Toggle menu
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 10;
@@ -48,9 +47,11 @@ const Navigation: React.FC = () => {
 
   return (
     <>
-      <motion.nav 
+      <motion.nav
         className={`fixed top-0 left-0 right-0 z-40 px-6 py-4 transition-all duration-300 ${
-          scrolled ? 'bg-black/70 backdrop-blur-md' : 'bg-transparent'
+          scrolled
+            ? 'bg-[var(--color-bg)]/80 backdrop-blur-md border-b border-[var(--color-border)]'
+            : 'bg-transparent'
         }`}
         initial="hidden"
         animate="visible"
@@ -58,19 +59,19 @@ const Navigation: React.FC = () => {
         transition={{ duration: 0.5 }}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <NavLink to="/" className="text-white font-semibold text-xl">
+          <NavLink to="/" className="text-[var(--color-text)] font-semibold text-xl">
             <span className="sr-only">Homepage</span>
           </NavLink>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
                 to={link.path}
-                className={({ isActive }) => 
-                  `text-white transition-all duration-300 relative px-1 py-2 text-sm uppercase tracking-wider ${
-                    isActive ? 'font-semibold' : 'font-light hover:font-normal'
+                className={({ isActive }) =>
+                  `text-[var(--color-text)] transition-all duration-300 relative px-1 py-2 text-sm uppercase tracking-wider ${
+                    isActive ? 'font-semibold' : 'font-light hover:font-normal opacity-70 hover:opacity-100'
                   }`
                 }
               >
@@ -78,8 +79,8 @@ const Navigation: React.FC = () => {
                   <>
                     {link.label}
                     {isActive && (
-                      <motion.div 
-                        className="absolute -bottom-1 left-0 w-full h-[1px] bg-white"
+                      <motion.div
+                        className="absolute -bottom-1 left-0 w-full h-[1px] bg-[var(--color-accent)]"
                         layoutId="navIndicator"
                         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       />
@@ -88,16 +89,34 @@ const Navigation: React.FC = () => {
                 )}
               </NavLink>
             ))}
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface)] transition-colors duration-300"
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white"
-            onClick={toggleMenu}
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: Theme Toggle + Menu Button */}
+          <div className="md:hidden flex items-center gap-3">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-surface)] transition-colors duration-300"
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              className="text-[var(--color-text)]"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -105,7 +124,7 @@ const Navigation: React.FC = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-30 bg-black md:hidden"
+            className="fixed inset-0 z-30 bg-[var(--color-bg)] md:hidden"
             initial="closed"
             animate="open"
             exit="closed"
@@ -123,8 +142,8 @@ const Navigation: React.FC = () => {
                 >
                   <NavLink
                     to={link.path}
-                    className={({ isActive }) => 
-                      `text-white text-2xl ${isActive ? 'font-semibold' : 'font-light'}`
+                    className={({ isActive }) =>
+                      `text-[var(--color-text)] text-2xl ${isActive ? 'font-semibold' : 'font-light'}`
                     }
                     onClick={() => setIsMenuOpen(false)}
                   >
