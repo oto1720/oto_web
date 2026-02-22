@@ -214,6 +214,24 @@ const experiences: Experience[] = [
     description: 'AIを使ったマッチングアプリを作成し、優秀賞を獲得',
     icon: <Circle size={20} />,
   },
+
+  {
+    id: 24,
+    title: 'Flutterの入門＋Liquid glass講座を開いた',
+    image: '/assets/images/Flutterliquid.png',
+    period: '2026 1月',
+    description: 'Flutterの環境構築から入門の講座とliquid glassの簡単な講座を3時間開いた',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 25,
+    title: 'ハッカソンでTRI-KNOTを作成',
+    image: '/assets/images/triknot.png',
+    period: '2026 2月',
+    description: 'ハッカソンで3人1組の連帯責任で「サボり」を防ぐ、運動習慣化監視アプリを作成した',
+    icon: <Circle size={20} />,
+  },
+
 ];
 
 const Profile: React.FC = () => {
