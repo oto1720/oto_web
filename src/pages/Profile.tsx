@@ -231,6 +231,14 @@ const experiences: Experience[] = [
     description: 'ハッカソンで3人1組の連帯責任で「サボり」を防ぐ、運動習慣化監視アプリを作成した',
     icon: <Circle size={20} />,
   },
+  {
+    id: 26,
+    title: 'ハッカソンでPatiPuro.vscodeを作成',
+    image: '/assets/images/pati.jpg',
+    period: '2026 2月',
+    description: 'ハッカソンでvscodeの拡張機能を使ってパチンコができるプロダクトを作成',
+    icon: <Circle size={20} />,
+  }
 
 ];
 
