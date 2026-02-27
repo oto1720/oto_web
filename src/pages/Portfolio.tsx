@@ -122,6 +122,24 @@ const projects = [
     github: 'https://github.com/hackathon-20260110/app_pub',
     liveDemo: 'https://drive.google.com/file/d/10rYh6ORxTrSG7dzlC-oskU0iFMgFFG68/view',
   },
+  {
+    id: 14,
+    title: 'TRI-KNOT',
+    description: 'ハッカソンで作成した、3人1組の連帯責任で「サボり」を防ぐ、運動習慣化監視アプリ',
+    image: '/assets/images/triknot.png',
+    technologies: ['Nest.js', 'TypeScript', 'Go', 'Echo', 'Swagger', 'PostgreSQL', 'Docker', 'Supabase','Google Cloud Run'],
+    github: 'https://github.com/trihackathon/app',
+    liveDemo: 'https://topaz.dev/projects/c0ed034fd5d669809012',
+  },
+  {
+    id: 15,
+    title: 'PatiPuro.vscode',
+    description: 'vscodeの拡張機能を使ってコードを打つとパチンコができるプロダクト',
+    image: '/assets/images/patipuro.png',
+    technologies: ['vscode', 'React', 'Matter.js','Websocket','Docker'],
+    github: 'https://github.com/guriguri00451/PatiPro',
+    liveDemo: 'https://topaz.dev/projects/9182aa2a62d8cc83b5f0',
+  },
 ];
 
 const Portfolio: React.FC = () => {
