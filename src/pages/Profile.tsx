@@ -1,11 +1,8 @@
-import React, { useRef, useEffect, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import Scene from '../components/three/Scene';
-import SpinningCube from '../components/three/SpinningCube';
-import { Code, Briefcase, GraduationCap, Circle } from 'lucide-react';
+import { Code, Briefcase, Circle } from 'lucide-react';
 
-// Sample profile data - replace with your actual data
 type Experience = {
   id: number;
   title: string;
@@ -14,287 +11,295 @@ type Experience = {
   period: string;
   description: string;
   icon: JSX.Element;
-  image?: string; // optional image path (e.g. "/assets/images/xxx.png")
-  link?: string;  // optional external link; card becomes clickable when set
+  image?: string;
+  link?: string;
 };
-const skills = [
-  { name: 'Flutter', level: 50 },
-  { name: 'GitHub', level: 50 },
-  { name: 'Next.js', level: 40 },
-  { name: 'React', level: 30 },
-  { name: 'Unity', level: 30 },
-  { name: 'Docker', level: 30 },
-  { name: 'Dart', level: 50 },
-  { name: 'TypeScript', level: 40 },
-  { name: 'Swift', level: 30 },
-  { name: 'Python', level: 20 },
-  { name: 'C#', level: 30 },
-  { name: 'Go', level: 20 },
+
+type SkillLevel = 'Advanced' | 'Intermediate' | 'Beginner';
+
+type Skill = {
+  name: string;
+  image?: string;
+  level: SkillLevel;
+};
+
+const skills: Skill[] = [
+  { name: 'Flutter',     image: '/assets/images/flutter.png', level: 'Advanced' },
+  { name: 'Dart',        image: '/assets/images/dart.png',    level: 'Advanced' },
+  { name: 'Swift',       image: '/assets/images/swift.png',   level: 'Advanced' },
+  { name: 'Next.js',     image: '/assets/images/next.png',    level: 'Intermediate' },
+  { name: 'React',                                            level: 'Intermediate' },
+  { name: 'TypeScript',  image: '/assets/images/ts.png',      level: 'Intermediate' },
+  { name: 'GitHub',      image: '/assets/images/github.jpg',  level: 'Intermediate' },
+  { name: 'Unity',                                            level: 'Beginner' },
+  { name: 'C#',                                               level: 'Beginner' },
+  { name: 'Docker',      image: '/assets/images/docker.jpeg',  level: 'Beginner' },
+  { name: 'Python',                                           level: 'Beginner' },
+  { name: 'Go',          image: '/assets/images/go.png',      level: 'Beginner' },
 ];
+
+const levelConfig: Record<SkillLevel, { label: string; className: string }> = {
+  Advanced:     { label: 'Advanced',     className: 'bg-[var(--color-accent)] text-white' },
+  Intermediate: { label: 'Intermediate', className: 'bg-blue-500 text-white' },
+  Beginner:     { label: 'Beginner',     className: 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)]' },
+};
 
 const experiences: Experience[] = [
   {
     id: 1,
     title: '福岡大学入学',
-    subtitle: '',
     period: '2024 4月',
     description: '福岡大学-工学部-電子情報工学科',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 2,
     title: '福大ピアプロ入部',
-    subtitle: '',
     period: '2024  4月',
     description: '福岡大学のプログラミングサークル、ピアプロに入部',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 3,
     title: '作るっちゃんのメンバーになる',
-    institution: '',
     period: '2024 5月',
     description: '九州の学生対象とした、ゲーム制作コミュニティーのメンバーになる',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 4,
     title: 'チャレキャラ参加',
-    institution: '',
     period: '2024 6月',
     description: '九州の学生を対象とした、アプリの開発を行うコンテストに参加',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 5,
     title: '初めてのゲームジャムに参加',
-    institution: '',
     image: '/assets/images/gejam1.JPG',
     period: '2024 8月',
     description: '福岡の学生を対象とした、ゲーム制作を行うジャムに参加',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 6,
     title: '作るっちゃんの運営になる',
-    institution: '',
     period: '2024 10月',
     description: 'ゲーム制作コミュニティーの運営に携わる',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 7,
     title: 'チャレキャラの発表',
-    institution: '',
     image: '/assets/images/tyarekyara.JPG',
     period: '2024 12月',
     description: '遊びと学びを題材にしたマッチングアプリの発表を行なった',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 8,
     title: '２回目のゲームジャム参加',
-    
-    institution: '',
     period: '2025 2月',
     image: '/assets/images/gejam2.JPG',
     description: '２回目となるゲームジャムに参加し、プログラムリーダーを務める',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 9,
     title: 'つくると参加',
     image: '/assets/images/tukuruto.jpg',
-    institution: '',
     period: '2025 2月',
     description: '工学系のイベントで、制作物を展示（チャレキャラで作成した作品を発表）',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 10,
     title: '技育ハッカソン参加',
-    institution: '',
     period: '2025 4月',
     description: '初めてのハッカソンに参加。チームで賞を受賞（フロントエンドを担当）',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 12,
     title: 'アプリをリリース',
     image: '/assets/images/neatify.png',
     link: 'https://apps.apple.com/jp/app/neatify/id6746064755',
-    institution: '',
     period: '2025 5月',
     description: '個人開発を行っていた、部屋掃除管理アプリをリリース',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 13,
     title: 'ハックツハッカソン',
-    institution: '',
     image: '/assets/images/hakkaso.jpeg',
     period: '2025 6月',
     description: 'aiを使った作品でWingArc1st賞を獲得。（フロントエンドを担当）',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 14,
     title: 'CyberAgentさんのMCPについて講演参加',
-    institution: '',
     period: '2025 7月',
     description: 'CA.ai MCPについての勉強会に参加',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 15,
     title: 'CyberAgentさんとサークルのイベントを主催',
-    institution: '',
     image: '/assets/images/cahakkaso.PNG',
     period: '2025 8月',
     description: '人のプロダクトをブラッシュアップするハッカソンイベントを主催(優秀賞獲得）',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 16,
     title: '学生展示会CPQの運営、開催',
-    institution: '',
     image: '/assets/images/CPQ.jpg',
     period: '2025 8月',
     description: '学生団体対象とした展示会の運営を行った。所属サークルも展示',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 17,
     title: 'サークル代表就任',
-    institution: '',
     period: '2025 9月',
     description: '所属サークル、福大ピアプロの代表に就任',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 18,
     title: '学生団体交流会参加',
-    institution: '',
     image: '/assets/images/giiku.jpg',
     period: '2025 10月',
     description: '全国のエンジニア学生団体と交流',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 19,
     title: 'RiverPodの講座を開く',
-    institution: '',
     image: '/assets/images/kouenn.png',
     period: '2025 10月',
     description: 'エンジニアカフェでRiverPodについてのハンズオン講座を開いた',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 20,
     title: 'Flutterkaigi2025に参加',
-    institution: '',
     image: '/assets/images/flutterkaigi.jpg',
     period: '2025 10月',
     description: 'Flutterのカンファレンスに参加',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 21,
     title: 'チャレキャラ2025に参加',
-    institution: '',
     image: '/assets/images/tyarekyara2.jpg',
     period: '2025 12月',
     description: 'チャレキャラ2025に参加し、企業賞を獲得',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 22,
     title: '株式会社dipさんとのLT会を主催',
-    institution: '',
     image: '/assets/images/dip.jpg',
     period: '2025 12月',
     description: '株式会社dipさんとのLT会を主催',
-    icon: <Circle size={24} />,
+    icon: <Circle size={20} />,
   },
   {
     id: 23,
     title: '技育キャンプvol17に参加',
-    institution: '',
     image: '/assets/images/giiku.png',
     period: '2026 1月',
     description: 'AIを使ったマッチングアプリを作成し、優秀賞を獲得',
-    icon: <Circle size={24} />,
-  }
+    icon: <Circle size={20} />,
+  },
+
+  {
+    id: 24,
+    title: 'Flutterの入門＋Liquid glass講座を開いた',
+    image: '/assets/images/Flutterliquid.png',
+    period: '2026 1月',
+    description: 'Flutterの環境構築から入門の講座とliquid glassの簡単な講座を3時間開いた',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 25,
+    title: 'ハッカソンでTRI-KNOTを作成',
+    image: '/assets/images/triknot.png',
+    period: '2026 2月',
+    description: 'ハッカソンで3人1組の連帯責任で「サボり」を防ぐ、運動習慣化監視アプリを作成した',
+    icon: <Circle size={20} />,
+  },
+
 ];
 
 const Profile: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ 
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-  
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [1, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const sortedExperiences = useMemo(
+    () => experiences.slice().sort((a, b) => b.id - a.id),
+    []
+  );
 
   return (
     <PageTransition>
-      <div ref={containerRef} className="min-h-screen relative">
-        {/* Background 3D Scene */}
-        <div className="fixed inset-0 z-0">
-          <Scene cameraPosition={[0, 0, 5]} controls={false}>
-            <SpinningCube position={[-2, 1, -2]} size={0.5} color="#ffffff" wireframe={true} speed={0.5} />
-            <SpinningCube position={[2, -1, -3]} size={0.8} color="#ffffff" wireframe={true} speed={0.3} />
-            <SpinningCube position={[0, 2, -4]} size={0.6} color="#ffffff" wireframe={true} speed={0.7} />
-          </Scene>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
-          <motion.div 
-            style={{ opacity, y }}
-            className="text-center mb-16"
+      <div className="min-h-screen bg-[var(--color-bg)]">
+        <div className="container mx-auto px-4 py-24 md:py-32">
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Profile</h1>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-[var(--color-text)]">
+              Profile
+            </h1>
           </motion.div>
 
           {/* Skills Section */}
-          <motion.section 
+          <motion.section
             className="mb-24"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-8 flex items-center">
-              <Code className="mr-3" /> Skills
+            <h2 className="text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3 text-[var(--color-text)]">
+              <Code size={24} className="text-[var(--color-accent)]" />
+              Skills
             </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {skills.map((skill, index) => (
-                <motion.div 
-                  key={skill.name}
-                  className="bg-white/5 backdrop-blur-sm rounded-lg p-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-lg font-medium">{skill.name}</h3>
-                    <span className="text-sm opacity-70">{skill.level}%</span>
-                  </div>
-                  <div className="w-full bg-white/10 rounded-full h-2">
-                    <motion.div 
-                      className="bg-white h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.2 }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
+
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+              {skills.map((skill, index) => {
+                const { label, className } = levelConfig[skill.level];
+                return (
+                  <motion.div
+                    key={skill.name}
+                    className="flex flex-col items-center gap-2 p-4 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl hover:border-[var(--color-accent)] transition-colors duration-300"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    {skill.image ? (
+                      <img
+                        src={skill.image}
+                        alt={skill.name}
+                        className="w-12 h-12 object-contain rounded-lg"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 rounded-lg bg-[var(--color-bg)] flex items-center justify-center text-[var(--color-text-muted)] text-xl font-bold">
+                        {skill.name.slice(0, 2)}
+                      </div>
+                    )}
+                    <span className="text-[var(--color-text)] text-xs font-medium text-center leading-tight">
+                      {skill.name}
+                    </span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${className}`}>
+                      {label}
+                    </span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.section>
 
@@ -305,31 +310,32 @@ const Profile: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-12 flex items-center">
-              <Briefcase className="mr-3" /> 経歴紹介
+            <h2 className="text-2xl md:text-3xl font-semibold mb-12 flex items-center gap-3 text-[var(--color-text)]">
+              <Briefcase size={24} className="text-[var(--color-accent)]" />
+              経歴紹介
             </h2>
 
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-white/20" />
+              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-[var(--color-border)]" />
 
-              {/* Timeline items */}
-              {useMemo(() => experiences.slice().sort((a,b) => b.id - a.id), [])
-              .map((item, index) => (
-                <motion.div 
+              {sortedExperiences.map((item, index) => (
+                <motion.div
                   key={item.id}
-                  className={`relative mb-16 md:mb-24 ${
+                  className={`relative mb-12 md:mb-16 ${
                     index % 2 === 0 ? 'md:pr-12 md:ml-auto md:mr-1/2' : 'md:pl-12 md:mr-auto md:ml-1/2'
                   } md:w-1/2`}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "200px" }}
+                  viewport={{ once: true, margin: '200px' }}
                   transition={{ duration: 0.5 }}
                 >
                   {/* Timeline node */}
-                  <div className={`absolute ${
-                    index % 2 === 0 ? 'md:-left-6 left-0' : 'md:-right-6 left-0'
-                  } top-0 w-12 h-12 rounded-full bg-black border border-white/30 flex items-center justify-center`}>
+                  <div
+                    className={`absolute ${
+                      index % 2 === 0 ? 'md:-left-6 left-0' : 'md:-right-6 left-0'
+                    } top-0 w-10 h-10 rounded-full bg-[var(--color-bg)] border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)]`}
+                  >
                     {item.icon}
                   </div>
 
@@ -339,7 +345,7 @@ const Profile: React.FC = () => {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block ml-16 md:ml-0 bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+                      className="block ml-14 md:ml-0 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 hover:border-[var(--color-accent)] transition-all duration-300"
                     >
                       {item.image && (
                         <img
@@ -347,29 +353,37 @@ const Profile: React.FC = () => {
                           alt={item.title}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-40 object-cover rounded-md mb-4"
+                          className="w-full h-36 object-cover rounded-lg mb-4"
                         />
                       )}
-                      <h3 className="text-xl font-semibold">{item.title}</h3>
-                      <p className="text-white/70 mb-2">{item.subtitle || item.institution}</p>
-                      <p className="text-sm text-white/50 mb-4">{item.period}</p>
-                      <p className="text-base">{item.description}</p>
+                      <h3 className="text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
+                      {(item.subtitle || item.institution) && (
+                        <p className="text-[var(--color-text-muted)] text-sm mt-1">
+                          {item.subtitle || item.institution}
+                        </p>
+                      )}
+                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-3 font-medium">{item.period}</p>
+                      <p className="text-[var(--color-text)] text-sm">{item.description}</p>
                     </a>
                   ) : (
-                    <div className="ml-16 md:ml-0 bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition-all duration-300">
+                    <div className="ml-14 md:ml-0 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 hover:border-[var(--color-accent)] transition-all duration-300">
                       {item.image && (
                         <img
                           src={item.image}
                           alt={item.title}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-40 object-cover rounded-md mb-4"
+                          className="w-full h-36 object-cover rounded-lg mb-4"
                         />
                       )}
-                      <h3 className="text-xl font-semibold">{item.title}</h3>
-                      <p className="text-white/70 mb-2">{item.subtitle || item.institution}</p>
-                      <p className="text-sm text-white/50 mb-4">{item.period}</p>
-                      <p className="text-base">{item.description}</p>
+                      <h3 className="text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
+                      {(item.subtitle || item.institution) && (
+                        <p className="text-[var(--color-text-muted)] text-sm mt-1">
+                          {item.subtitle || item.institution}
+                        </p>
+                      )}
+                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-3 font-medium">{item.period}</p>
+                      <p className="text-[var(--color-text)] text-sm">{item.description}</p>
                     </div>
                   )}
                 </motion.div>
