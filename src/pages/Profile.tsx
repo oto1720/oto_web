@@ -26,7 +26,8 @@ type Skill = {
 const skills: Skill[] = [
   { name: 'Flutter',     image: '/assets/images/flutter.png', level: 'Advanced' },
   { name: 'Dart',        image: '/assets/images/dart.png',    level: 'Advanced' },
-  { name: 'Swift',       image: '/assets/images/swift.png',   level: 'Advanced' },
+  { name: 'Swift',       image: '/assets/images/swift.png',   level: 'Intermediate' },
+  { name: 'Kotlin',      image: '/assets/images/kotlin.jpeg',  level: 'Intermediate' },
   { name: 'Next.js',     image: '/assets/images/next.png',    level: 'Intermediate' },
   { name: 'React',                                            level: 'Intermediate' },
   { name: 'TypeScript',  image: '/assets/images/ts.png',      level: 'Intermediate' },
@@ -237,6 +238,14 @@ const experiences: Experience[] = [
     image: '/assets/images/pati.jpg',
     period: '2026 2月',
     description: 'ハッカソンでvscodeの拡張機能を使ってパチンコができるプロダクトを作成',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 27,
+    title: 'CA Tech Dojoに参加(1weekでのandroidアプリ開発インターン）',
+    image: '/assets/images/catech.png',
+    period: '2026 3月',
+    description: 'CA Tech Dojoに参加し、1weekでのandroidアプリ開発インターンを行った。最優秀賞を獲得',
     icon: <Circle size={20} />,
   }
 
