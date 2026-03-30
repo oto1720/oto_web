@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import { Code, Briefcase, Circle } from 'lucide-react';
+import { Code, Briefcase, Circle, Trophy } from 'lucide-react';
 
 type Experience = {
   id: number;
@@ -44,6 +44,21 @@ const levelConfig: Record<SkillLevel, { label: string; className: string }> = {
   Intermediate: { label: 'Intermediate', className: 'bg-blue-500 text-white' },
   Beginner:     { label: 'Beginner',     className: 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)]' },
 };
+
+type Award = {
+  event: string;
+  prize: string;
+};
+
+const awards: Award[] = [
+  { event: 'サイバーエージェント主催 内製化ハッカソン', prize: '最優秀賞' },
+  { event: 'サイバーエージェント CA Tech Dojo 1week Android インターン', prize: '最優秀賞' },
+  { event: '技育キャンプ vol17', prize: '優秀賞' },
+  { event: 'チャレキャラ2025', prize: 'サイバーエージェント賞' },
+  { event: 'サイバーエージェントとのハッカソン', prize: '優秀賞' },
+  { event: 'ハックツハッカソン', prize: 'WingArc1st賞' },
+  { event: '技育ハッカソン', prize: '参加賞' },
+];
 
 const experiences: Experience[] = [
   {
@@ -247,6 +262,14 @@ const experiences: Experience[] = [
     period: '2026 3月',
     description: 'CA Tech Dojoに参加し、1weekでのandroidアプリ開発インターンを行った。最優秀賞を獲得',
     icon: <Circle size={20} />,
+  },
+  {
+    id: 28,
+    title: 'CybarAgentさんとの内製化ハッカソン',
+    image: '/assets/images/cyberagent.jpg',
+    period: '2026 3月',
+    description: 'CyberAgentさんとの内製化ハッカソンに参加し、最優秀賞を獲得',
+    icon: <Circle size={20} />,
   }
 
 ];
@@ -285,7 +308,7 @@ const Profile: React.FC = () => {
               Skills
             </h2>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {skills.map((skill, index) => {
                 const { label, className } = levelConfig[skill.level];
                 return (
@@ -317,6 +340,41 @@ const Profile: React.FC = () => {
                   </motion.div>
                 );
               })}
+            </div>
+          </motion.section>
+
+          {/* Awards Section */}
+          <motion.section
+            className="mb-24"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3 text-[var(--color-text)]">
+              <Trophy size={24} className="text-[var(--color-accent)]" />
+              実績・受賞歴
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {awards.map((award, index) => (
+                <motion.div
+                  key={index}
+                  className="flex gap-4 p-5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl hover:border-[var(--color-accent)] hover:shadow-lg transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.06 }}
+                >
+                  {/* accent bar */}
+                  <div className="shrink-0 w-1 rounded-full bg-[var(--color-accent)]" />
+                  <div className="flex flex-col justify-between gap-3 min-w-0 flex-1">
+                    <span className="text-base font-semibold text-[var(--color-text)] leading-snug">{award.event}</span>
+                    <span className="inline-block self-start px-4 py-1.5 text-sm font-bold bg-[var(--color-accent)] text-white rounded-full">
+                      {award.prize}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.section>
 

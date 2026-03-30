@@ -7,18 +7,9 @@ interface PageTransitionProps {
 
 const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const pageVariants = {
-    initial: {
-      opacity: 0,
-      y: 20
-    },
-    animate: {
-      opacity: 1,
-      y: 0
-    },
-    exit: {
-      opacity: 0,
-      y: -20
-    }
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 }
   };
 
   return (
@@ -27,7 +18,7 @@ const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       animate="animate"
       exit="exit"
       variants={pageVariants}
-      transition={{ duration: 0.6, ease: "easeInOut" }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       className="w-full"
     >
       {children}

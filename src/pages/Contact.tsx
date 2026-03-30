@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import AnimatedBackground from '../components/AnimatedBackground';
 import { Mail, Github, Twitter, Link2 } from 'lucide-react';
 
 const Contact: React.FC = () => {
@@ -15,8 +14,6 @@ const Contact: React.FC = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-[var(--color-bg)] relative">
-        <AnimatedBackground />
-
         <div className="relative z-10 container mx-auto px-4 py-24 md:py-32 flex flex-col items-center">
           <motion.div
             className="mb-12 text-center"
@@ -31,7 +28,7 @@ const Contact: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-8 w-full max-w-md"
+            className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 md:p-8 w-full max-w-md"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

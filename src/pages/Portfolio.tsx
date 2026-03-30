@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import AnimatedBackground from '../components/AnimatedBackground';
 import { X, Github, ExternalLink } from 'lucide-react';
 
 type Project = {
@@ -189,6 +188,7 @@ const projects: Project[] = [
     challenges: ['VSCode 拡張機能 API の学習と活用', 'コードタイプイベントを WebSocket でリアルタイムにブラウザへ送信する設計', 'Matter.js の物理演算チューニング'],
     learnings: ['VSCode Extension API の仕組み', 'WebSocket によるリアルタイム双方向通信の実装', 'Matter.js を使ったブラウザ物理演算'],
   },
+  
 ];
 
 type TabKey = 'overview' | 'role' | 'learnings';
@@ -213,8 +213,6 @@ const Portfolio: React.FC = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-[var(--color-bg)] relative">
-        <AnimatedBackground />
-
         <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
           <motion.div
             className="mb-12"
