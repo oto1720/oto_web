@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
           </motion.div>
 
           <motion.div
-            className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-8 w-full max-w-md"
+            className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 md:p-8 w-full max-w-md"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

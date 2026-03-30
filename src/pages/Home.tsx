@@ -165,7 +165,7 @@ const Home: React.FC = () => {
             Works
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
             {projects.map((project, index) => (
               <Link key={project.id} to="/portfolio" className="block group">
                 <motion.div

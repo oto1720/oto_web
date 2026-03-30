@@ -308,7 +308,7 @@ const Profile: React.FC = () => {
               Skills
             </h2>
 
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {skills.map((skill, index) => {
                 const { label, className } = levelConfig[skill.level];
                 return (
@@ -392,25 +392,19 @@ const Profile: React.FC = () => {
 
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-[var(--color-border)]" />
+              <div className="absolute left-5 top-0 h-full w-px bg-[var(--color-border)]" />
 
-              {sortedExperiences.map((item, index) => (
+              {sortedExperiences.map((item) => (
                 <motion.div
                   key={item.id}
-                  className={`relative mb-12 md:mb-16 ${
-                    index % 2 === 0 ? 'md:pr-12 md:ml-auto md:mr-1/2' : 'md:pl-12 md:mr-auto md:ml-1/2'
-                  } md:w-1/2`}
-                  initial={{ opacity: 0, y: 50 }}
+                  className="relative mb-8 pl-16"
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '200px' }}
-                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true, margin: '100px' }}
+                  transition={{ duration: 0.4 }}
                 >
                   {/* Timeline node */}
-                  <div
-                    className={`absolute ${
-                      index % 2 === 0 ? 'md:-left-6 left-0' : 'md:-right-6 left-0'
-                    } top-0 w-10 h-10 rounded-full bg-[var(--color-bg)] border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)]`}
-                  >
+                  <div className="absolute left-0 top-0 w-10 h-10 rounded-full bg-[var(--color-bg)] border-2 border-[var(--color-accent)] flex items-center justify-center text-[var(--color-accent)]">
                     {item.icon}
                   </div>
 
@@ -420,7 +414,7 @@ const Profile: React.FC = () => {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block ml-14 md:ml-0 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 hover:border-[var(--color-accent)] transition-all duration-300"
+                      className="block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-4 md:p-5 hover:border-[var(--color-accent)] transition-all duration-300"
                     >
                       {item.image && (
                         <img
@@ -428,36 +422,32 @@ const Profile: React.FC = () => {
                           alt={item.title}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-36 object-cover rounded-lg mb-4"
+                          className="w-full h-36 md:h-48 object-cover rounded-lg mb-4"
                         />
                       )}
-                      <h3 className="text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
+                      <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
                       {(item.subtitle || item.institution) && (
-                        <p className="text-[var(--color-text-muted)] text-sm mt-1">
-                          {item.subtitle || item.institution}
-                        </p>
+                        <p className="text-[var(--color-text-muted)] text-sm mt-1">{item.subtitle || item.institution}</p>
                       )}
-                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-3 font-medium">{item.period}</p>
+                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-2 font-medium">{item.period}</p>
                       <p className="text-[var(--color-text)] text-sm">{item.description}</p>
                     </a>
                   ) : (
-                    <div className="ml-14 md:ml-0 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-5 hover:border-[var(--color-accent)] transition-all duration-300">
+                    <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-4 md:p-5 hover:border-[var(--color-accent)] transition-all duration-300">
                       {item.image && (
                         <img
                           src={item.image}
                           alt={item.title}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-36 object-cover rounded-lg mb-4"
+                          className="w-full h-36 md:h-48 object-cover rounded-lg mb-4"
                         />
                       )}
-                      <h3 className="text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
+                      <h3 className="text-base md:text-lg font-semibold text-[var(--color-text)]">{item.title}</h3>
                       {(item.subtitle || item.institution) && (
-                        <p className="text-[var(--color-text-muted)] text-sm mt-1">
-                          {item.subtitle || item.institution}
-                        </p>
+                        <p className="text-[var(--color-text-muted)] text-sm mt-1">{item.subtitle || item.institution}</p>
                       )}
-                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-3 font-medium">{item.period}</p>
+                      <p className="text-xs text-[var(--color-accent)] mt-1 mb-2 font-medium">{item.period}</p>
                       <p className="text-[var(--color-text)] text-sm">{item.description}</p>
                     </div>
                   )}
