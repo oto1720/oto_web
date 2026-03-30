@@ -4,7 +4,6 @@ import { AnimatePresence } from 'framer-motion';
 
 // Components
 import Navigation from './components/Navigation';
-import Cursor from './components/Cursor';
 import LoadingScreen from './components/LoadingScreen';
 
 // Pages - Lazy loaded for code splitting
@@ -16,15 +15,15 @@ const Contact = lazy(() => import('./pages/Contact'));
 function App() {
   const location = useLocation();
 
-  // Update page title based on current route
+  // Update page title and scroll to top on navigation
   useEffect(() => {
     const pageName = location.pathname.slice(1) || 'home';
     document.title = `${pageName.charAt(0).toUpperCase() + pageName.slice(1)} | Personal Homepage`;
+    window.scrollTo(0, 0);
   }, [location]);
 
   return (
-    <div className="relative min-h-screen bg-black text-white">
-      <Cursor />
+    <div className="relative min-h-screen bg-[var(--color-bg)] text-[var(--color-text)]">
       <Navigation />
 
       <main className="w-full">

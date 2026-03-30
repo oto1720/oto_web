@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import PageTransition from '../components/PageTransition';
-import AnimatedBackground from '../components/AnimatedBackground';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 
 const projects = [
@@ -30,11 +29,10 @@ const projects = [
 ];
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.8 }
+    transition: { duration: 0.6 }
   }
 };
 
@@ -43,7 +41,6 @@ const Home: React.FC = () => {
     <PageTransition>
       {/* Hero Section */}
       <div className="w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center bg-[var(--color-bg)]">
-        <AnimatedBackground />
 
         {/* Gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 pointer-events-none" />
@@ -66,13 +63,23 @@ const Home: React.FC = () => {
           </motion.div>
 
           <motion.p
-            className="text-xl md:text-2xl font-light max-w-2xl mx-auto text-[var(--color-text-muted)] mb-12"
+            className="text-xl md:text-2xl font-light max-w-2xl mx-auto text-[var(--color-text-muted)] mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
             こちらがotoのポートフォリオです。
           </motion.p>
+
+          <motion.div
+            className="mb-12 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.6 }}
+          >
+            <p className="text-lg font-medium text-[var(--color-text)]">乙津孝太朗</p>
+            <p className="text-sm text-[var(--color-text-muted)]">福岡大学工学部電子情報工学科</p>
+          </motion.div>
 
           <motion.div
             className="flex flex-wrap gap-4 justify-center mb-16"
@@ -214,7 +221,6 @@ const Home: React.FC = () => {
         viewport={{ once: true, margin: '-100px' }}
         variants={sectionVariants}
       >
-        <AnimatedBackground />
         <div className="max-w-6xl mx-auto relative z-10 text-center">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-[var(--color-text)] mb-6">
             Contact
