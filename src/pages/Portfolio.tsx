@@ -210,7 +210,7 @@ const projects: Project[] = [
     id: 17,
     title: 'フクメシ',
     description: '福岡大学近くの飲食店を表示してルーレットで決めれるアプリ',
-    image: '/assets/images/fukumeshi.png',
+    image: '/assets/images/hukumeshi.png',
     technologies: ['go', 'kotlin', 'swift', 'postgresql', 'docker', 'cloudflare'],
     github: '',
     liveDemo: 'https://apps.apple.com/jp/app/%E3%83%95%E3%82%AF%E3%83%A1%E3%82%B7/id6760387008',
