@@ -224,7 +224,35 @@ const projects: Project[] = [
     learnings: ['Go での Clean Architecture と DI パターンの実践',                              
         'Jetpack Compose + UseCase / Repository パターンによる Android 開発',           
         'SwiftUI を用いた iOS アプリの画面設計と Data / Domain / Presentation 分離'],
+  },
+  {
+    id: 18,
+    title: 'Roadmap AI',
+    description: 'サークル用にAIを活用してプロジェクトの開発ロードマップを自動生成し、ガントチャートやカンバンでチームの進行管理ができるWebアプリケーション',
+    image: '/assets/images/Roadmap.png',
+    technologies: ['go', 'next.js', 'typescript', 'postgresql', 'docker', 'supabase', 'gemini API'],
+    github: '',
+    liveDemo: 'roadmap-roan-one.vercel.app',
+    role: [
+        'Next.js (App Router) を用いた複雑なUI（ガントチャート、カンバン、依存関係マップ等）の設計・実装',
+        'Go を用いたレイヤードアーキテクチャに基づく RESTful API の設計・実装',
+        'Gemini API を組み込んだ、要件からのタスク分解・技術スタック提案・学習リソース自動生成ロジックの開発',
+        'Supabase Auth と連携した、RBAC（ロールベース）および ABAC（属性ベース）による高度なチーム権限管理基盤の構築',
+        'Docker を用いた開発環境の構築と、DBマイグレーション（migrate）や型安全なクエリ生成（sqlc）の導入'
+    ],
+    challenges: [
+        'AI (Gemini) が出力する動的なJSONデータを安定してパースし、リレーショナルDBのモデル構造（プロジェクト・フェーズ・タスク）へマッピングする処理の実装',
+        'Go バックエンドにおける DI（依存性の注入）を用いた疎結合なアーキテクチャ設計と、ミドルウェアによるセキュアな認可（チーム単位・ユーザー単位）の実装',
+        'タスク間の依存関係や学習ログなど、複雑に絡み合うデータの整合性を保つためのデータベース設計と sqlc を活用したクエリ最適化'
+    ],
+    learnings: [
+        'Go言語における実践的なAPIサーバー構築ノウハウ（DI、ミドルウェア設計、sqlcによる型安全なDB操作）',
+        'Next.js App Router 環境下での複雑な状態管理と、リッチでインタラクティブなUI（ダッシュボードやカンバンボード）の実装手法',
+        'LLM（Gemini API）を単なるチャットではなく、プロダクトのコアドメイン（ロードマップ生成）としてシステムに組み込む際のプロンプトエンジニアリングとエラーハンドリング',
+        'Supabaseを活用した実践的な認証・認可フローと、スケーラブルな権限設計（RBAC/ABAC）の知見'
+    ]
   }
+  
   
 ];
 
