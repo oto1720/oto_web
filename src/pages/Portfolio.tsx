@@ -232,7 +232,7 @@ const projects: Project[] = [
     image: '/assets/images/Roadmap.png',
     technologies: ['go', 'next.js', 'typescript', 'postgresql', 'docker', 'supabase', 'gemini API'],
     github: '',
-    liveDemo: 'roadmap-roan-one.vercel.app',
+    liveDemo: 'https://roadmap-roan-one.vercel.app/',
     role: [
         'Next.js (App Router) を用いた複雑なUI（ガントチャート、カンバン、依存関係マップ等）の設計・実装',
         'Go を用いたレイヤードアーキテクチャに基づく RESTful API の設計・実装',
