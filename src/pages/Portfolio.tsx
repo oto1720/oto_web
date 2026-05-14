@@ -251,6 +251,30 @@ const projects: Project[] = [
         'LLM（Gemini API）を単なるチャットではなく、プロダクトのコアドメイン（ロードマップ生成）としてシステムに組み込む際のプロンプトエンジニアリングとエラーハンドリング',
         'Supabaseを活用した実践的な認証・認可フローと、スケーラブルな権限設計（RBAC/ABAC）の知見'
     ]
+  },
+  {
+    id: 19,
+    title: 'Politown',
+    description: '街を動かし、意見を育てる政治シミュレーション・ノベルゲーム。仮想の街を舞台にプレイヤーが市長として住民との対話と政策決定を通じて自分の政治的意見を言語化していく。',
+    image: '/assets/images/politown.png',
+    technologies: ['Flutter', 'Dart', 'FastAPI', 'Python', 'GoogleCloud', 'Firebase'],
+    github: 'https://github.com/2026-hack-1/project_pub',
+    liveDemo: 'https://docs.google.com/presentation/d/14hCP3s9p7_FoaGrtOG0X3ycdw4cqCQzAEASQ-1C2ZaU/edit?slide=id.p#slide=id.p',
+    role: [
+        'Flutter によるノベル型ゲーム UI の設計・実装（住民との対話画面、政策選択 UI）',
+        'FastAPI を用いた NPC 対話生成 API の設計・実装',
+        'Google Cloud Run + Cloud SQL によるバックエンドインフラ構築、Firebase による認証管理'
+    ],
+    challenges: [
+        'シナリオの政治的偏りを LLM で定量評価する中立性スコアの設計と、判定基準の妥当性検証',
+        'プロンプトインジェクション対策（ユーザー入力の検証と NPC 設定情報との突き合わせ検証を二段で実装予定）',
+    ],
+    learnings: [
+        'HumanLM の研究知見を応用した、応答模倣ではなく状態ベースの NPC 人格設計の手法',
+        'LLM をゲームのコアドメイン（対話生成・中立性評価）として組み込む際のプロンプトエンジニアリング',
+        '政治・社会課題を扱うプロダクトにおける中立性設計と、エンタメ×教育の両立アプローチ',
+        'Google Cloud Run と FastAPI を組み合わせたサーバーレスなバックエンドの設計・運用'
+    ]
   }
   
   
