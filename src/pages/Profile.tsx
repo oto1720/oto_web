@@ -274,6 +274,14 @@ const experiences: Experience[] = [
   },
   {
     id: 29,
+    title: 'hack1の一ヶ月ハッカソン',
+    image: '/assets/images/hack1.png',
+    period: '2026 4月',
+    description: '全国でのハッカソンイベントであるhack1の一ヶ月ハッカソンに参加した',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 30,
     title: '三団体合同ハッカソン',
     image: '/assets/images/dddd.jpg',
     period: '2026 5月',
