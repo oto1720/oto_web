@@ -58,6 +58,7 @@ const awards: Award[] = [
   { event: 'サイバーエージェントとのハッカソン', prize: '優秀賞' },
   { event: 'ハックツハッカソン', prize: 'WingArc1st賞' },
   { event: '技育ハッカソン', prize: '参加賞' },
+  { event: 'DDDハッカソン', prize: 'サイバーエージェント賞' },
 ];
 
 const experiences: Experience[] = [
@@ -269,6 +270,14 @@ const experiences: Experience[] = [
     image: '/assets/images/cyberagent.jpg',
     period: '2026 3月',
     description: 'CyberAgentさんとの内製化ハッカソンに参加し、最優秀賞を獲得',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 29,
+    title: '三団体合同ハッカソン',
+    image: '/assets/images/dddd.jpg',
+    period: '2026 5月',
+    description: 'DDDハッカソンに参加し、サイバーエージェント賞を獲得',
     icon: <Circle size={20} />,
   }
 
