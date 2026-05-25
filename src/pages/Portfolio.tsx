@@ -275,6 +275,31 @@ const projects: Project[] = [
         '政治・社会課題を扱うプロダクトにおける中立性設計と、エンタメ×教育の両立アプローチ',
         'Google Cloud Run と FastAPI を組み合わせたサーバーレスなバックエンドの設計・運用'
     ]
+  },
+  {
+    id: 20,
+    title: 'DDD (Doki Doki Development)',
+    description: 'git commit する瞬間の心拍数が閾値（デフォルト120bpm）を超えていないとコミットを拒否する開発環境。「情熱を持ってコードを書こう」を生体情報レベルで強制するプロダクト。Apple Watch で取得した心拍を 1Hz でストリーミングし、commit の瞬間に判定する。',
+    image: '/assets/images/ddd.png',
+    technologies: ['Swift', 'SwiftUI', 'Go', 'TypeScript', 'Next.js', 'Firebase'],
+    github: 'https://github.com/DDD-hack/DDDapp', // DDD のリポジトリ URL に差し替え
+    liveDemo: 'https://topaz.dev/projects/5708d760a3ee91111faa', // 公開ダッシュボードや発表資料があれば
+    role: [
+        'Apple Watch / iPhone コンパニオンアプリの実装（HealthKit の HKLiveWorkoutBuilder による 1Hz 心拍取得、WatchConnectivity 連携）',
+        'Go デーモン + pre-commit hook による心拍ゲート機構の設計・実装（WebSocket 常時接続でコミット判定レイテンシを3秒以内に抑制）',
+        'Next.js によるリアルタイム心拍ダッシュボード・チームランキング・ヒートマップ可視化の実装',
+    ],
+    challenges: [
+        'Apple Watch の心拍取得遅延の解消（クエリ型 HKAnchoredObjectQuery からストリーム型 HKLiveWorkoutBuilder への切り替えでサブ秒取得を実現）',
+        'WebSocket の再接続管理（iPhone スリープ・Wi-Fi 切断・デーモン再起動に対する三重経路フォールトトレラント設計）',
+        '生体情報を開発体験に統合する UX 設計（拒否されるだけでなく、リアルタイム bpm 表示と煽り文で「拒否される側もエンタメ」にする）',
+    ],
+    learnings: [
+        'Swift / Go / TypeScript / shell の4言語をまたぐリアルタイムパイプラインの統合設計',
+        '人体をひとつのデバイスとして扱う、生体情報 × 開発フローという新しい領域への挑戦',
+        'ローカル daemon + Firebase RTDB フォールバックによるハイブリッドクラウド / Fail-safe 設計',
+        'コミット数（青）と心拍数（赤）を重ね合わせ「熱狂」を紫で表現する、色覚多様性に配慮した viridis 系ヒートマップの可視化設計',
+    ]
   }
   
   
