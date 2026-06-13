@@ -287,6 +287,22 @@ const experiences: Experience[] = [
     period: '2026 5月',
     description: 'DDDハッカソンに参加し、サイバーエージェント賞を獲得',
     icon: <Circle size={20} />,
+  },
+  {
+    id: 31,
+    title: 'Flutter webのハンズオン講座開催',
+    image: '/assets/images/flutterweb.png',
+    period: '2026 5月',
+    description: 'Flutter webのハンズオン講座を開催',
+    icon: <Circle size={20} />,
+  },
+  {
+    id: 32,
+    title: 'dipさんとのAI-DLCハンズオン',
+    image: '/assets/images/dip1.jpg',
+    period: '2026 6月',
+    description: '株式会社dipさんとのAI-DLCのハンズオンを開催',
+    icon: <Circle size={20} />,
   }
 
 ];
