@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import { Code, Briefcase, Circle, Trophy } from 'lucide-react';
+import { Code, Briefcase, Circle, Trophy, Building2 } from 'lucide-react';
 
 type Experience = {
   id: number;
@@ -44,6 +44,43 @@ const levelConfig: Record<SkillLevel, { label: string; className: string }> = {
   Intermediate: { label: 'Intermediate', className: 'bg-blue-500 text-white' },
   Beginner:     { label: 'Beginner',     className: 'bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)]' },
 };
+
+type Internship = {
+  company: string;
+  period: string;
+  role: string;
+  description: string;
+  technologies: string[];
+  image?: string;
+};
+
+const internships: Internship[] = [
+  {
+    company: '株式会社サイバーエージェント',
+    period: '2026年3月',
+    role: 'CA Tech Dojo - Android エンジニア（1week インターン）',
+    description: '1週間でAndroidアプリを開発するインターンに参加。Clean Architecture + MVVM に基づく設計と実装を行い、最優秀賞を獲得。',
+    technologies: ['Kotlin', 'Jetpack Compose', 'Room', 'Hilt'],
+    image: '/assets/images/catech.png',
+  },
+  {
+    company: 'TrueNest',
+    period: '2026年4-7月',
+    role: '兄の会社の業務委託（サイトのシステム作り）',
+    description: 'レンタルスペース事業を行う兄の会社でのレンタルスペースの予約サイトのシステム作りを行った。要件定義、設計、実装、テスト、デプロイ、運用までを担当。',
+    technologies: ['React', 'TypeScript', 'echo', 'Go','PostgreSQL','Neon', 'Docker', 'Cloud Run'],
+    image: '/assets/images/catech.png',
+  },
+  {
+    company: '株式会社サイバーエージェント',
+    period: '2026年8月',
+    role: 'CA Job Lite - Flutter エンジニア（2week インターン）参加予定',
+    description: '',
+    technologies: ['Flutter'],
+    image: '/assets/images/catech.png',
+  }
+  
+];
 
 type Award = {
   event: string;
@@ -373,6 +410,69 @@ const Profile: React.FC = () => {
                   </motion.div>
                 );
               })}
+            </div>
+          </motion.section>
+
+          {/* Internship Section */}
+          <motion.section
+            className="mb-24"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3 text-[var(--color-text)]">
+              <Building2 size={24} className="text-[var(--color-accent)]" />
+              インターン・業務経験
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {internships.map((intern, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl overflow-hidden hover:border-[var(--color-accent)] hover:shadow-lg transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.06 }}
+                >
+                  {intern.image && (
+                    <img
+                      src={intern.image}
+                      alt={intern.company}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-40 object-cover"
+                    />
+                  )}
+                  <div className="p-5">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-base font-semibold text-[var(--color-text)]">
+                        {intern.company}
+                      </span>
+                      <span className="text-xs text-[var(--color-accent)] font-medium">
+                        {intern.period}
+                      </span>
+                    </div>
+                    <p className="text-sm font-medium text-[var(--color-text-muted)] mb-2">
+                      {intern.role}
+                    </p>
+                    <p className="text-sm text-[var(--color-text-muted)] mb-3">
+                      {intern.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {intern.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-0.5 text-xs bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.section>
 
