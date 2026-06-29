@@ -61,7 +61,7 @@ const internships: Internship[] = [
     role: 'CA Tech Dojo - Android エンジニア（1week インターン）',
     description: '1週間でAndroidアプリを開発するインターンに参加。Clean Architecture + MVVM に基づく設計と実装を行い、最優秀賞を獲得。',
     technologies: ['Kotlin', 'Jetpack Compose', 'Room', 'Hilt'],
-    image: '/assets/images/catech.png',
+    image: '/assets/images/cainternandroid.png',
   },
   {
     company: 'TrueNest',
@@ -69,7 +69,7 @@ const internships: Internship[] = [
     role: '兄の会社の業務委託（サイトのシステム作り）',
     description: 'レンタルスペース事業を行う兄の会社でのレンタルスペースの予約サイトのシステム作りを行った。要件定義、設計、実装、テスト、デプロイ、運用までを担当。',
     technologies: ['React', 'TypeScript', 'echo', 'Go','PostgreSQL','Neon', 'Docker', 'Cloud Run'],
-    image: '/assets/images/catech.png',
+    image: '/assets/images/truenest.png',
   },
   {
     company: '株式会社サイバーエージェント',
@@ -77,7 +77,7 @@ const internships: Internship[] = [
     role: 'CA Job Lite - Flutter エンジニア（2week インターン）参加予定',
     description: '',
     technologies: ['Flutter'],
-    image: '/assets/images/catech.png',
+    image: '/assets/images/cainternflutter.png',
   }
   
 ];
