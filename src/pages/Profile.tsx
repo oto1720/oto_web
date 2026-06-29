@@ -1,7 +1,11 @@
-import React, { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
 import { Code, Briefcase, Circle, Trophy, Building2 } from 'lucide-react';
+
+type Tag = 'ハッカソン' | 'サークル' | 'イベント' | '個人開発' | '講座・登壇' | 'インターン';
+
+const allTags: Tag[] = ['ハッカソン', 'サークル', 'イベント', '個人開発', '講座・登壇', 'インターン'];
 
 type Experience = {
   id: number;
@@ -13,6 +17,7 @@ type Experience = {
   icon: JSX.Element;
   image?: string;
   link?: string;
+  tags: Tag[];
 };
 
 type SkillLevel = 'Advanced' | 'Intermediate' | 'Beginner';
@@ -105,6 +110,7 @@ const experiences: Experience[] = [
     period: '2024 4月',
     description: '福岡大学-工学部-電子情報工学科',
     icon: <Circle size={20} />,
+    tags: ['サークル'],
   },
   {
     id: 2,
@@ -112,6 +118,7 @@ const experiences: Experience[] = [
     period: '2024  4月',
     description: '福岡大学のプログラミングサークル、ピアプロに入部',
     icon: <Circle size={20} />,
+    tags: ['サークル'],
   },
   {
     id: 3,
@@ -119,6 +126,7 @@ const experiences: Experience[] = [
     period: '2024 5月',
     description: '九州の学生対象とした、ゲーム制作コミュニティーのメンバーになる',
     icon: <Circle size={20} />,
+    tags: ['サークル'],
   },
   {
     id: 4,
@@ -126,6 +134,7 @@ const experiences: Experience[] = [
     period: '2024 6月',
     description: '九州の学生を対象とした、アプリの開発を行うコンテストに参加',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 5,
@@ -134,6 +143,7 @@ const experiences: Experience[] = [
     period: '2024 8月',
     description: '福岡の学生を対象とした、ゲーム制作を行うジャムに参加',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 6,
@@ -141,6 +151,7 @@ const experiences: Experience[] = [
     period: '2024 10月',
     description: 'ゲーム制作コミュニティーの運営に携わる',
     icon: <Circle size={20} />,
+    tags: ['サークル'],
   },
   {
     id: 7,
@@ -149,6 +160,7 @@ const experiences: Experience[] = [
     period: '2024 12月',
     description: '遊びと学びを題材にしたマッチングアプリの発表を行なった',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 8,
@@ -157,6 +169,7 @@ const experiences: Experience[] = [
     image: '/assets/images/gejam2.JPG',
     description: '２回目となるゲームジャムに参加し、プログラムリーダーを務める',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 9,
@@ -165,6 +178,7 @@ const experiences: Experience[] = [
     period: '2025 2月',
     description: '工学系のイベントで、制作物を展示（チャレキャラで作成した作品を発表）',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 10,
@@ -172,6 +186,7 @@ const experiences: Experience[] = [
     period: '2025 4月',
     description: '初めてのハッカソンに参加。チームで賞を受賞（フロントエンドを担当）',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 12,
@@ -181,6 +196,7 @@ const experiences: Experience[] = [
     period: '2025 5月',
     description: '個人開発を行っていた、部屋掃除管理アプリをリリース',
     icon: <Circle size={20} />,
+    tags: ['個人開発'],
   },
   {
     id: 13,
@@ -189,6 +205,7 @@ const experiences: Experience[] = [
     period: '2025 6月',
     description: 'aiを使った作品でWingArc1st賞を獲得。（フロントエンドを担当）',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 14,
@@ -196,6 +213,7 @@ const experiences: Experience[] = [
     period: '2025 7月',
     description: 'CA.ai MCPについての勉強会に参加',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 15,
@@ -204,6 +222,7 @@ const experiences: Experience[] = [
     period: '2025 8月',
     description: '人のプロダクトをブラッシュアップするハッカソンイベントを主催(優秀賞獲得）',
     icon: <Circle size={20} />,
+    tags: ['イベント', 'サークル'],
   },
   {
     id: 16,
@@ -212,6 +231,7 @@ const experiences: Experience[] = [
     period: '2025 8月',
     description: '学生団体対象とした展示会の運営を行った。所属サークルも展示',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 17,
@@ -219,6 +239,7 @@ const experiences: Experience[] = [
     period: '2025 9月',
     description: '所属サークル、福大ピアプロの代表に就任',
     icon: <Circle size={20} />,
+    tags: ['サークル'],
   },
   {
     id: 18,
@@ -227,6 +248,7 @@ const experiences: Experience[] = [
     period: '2025 10月',
     description: '全国のエンジニア学生団体と交流',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 19,
@@ -235,6 +257,7 @@ const experiences: Experience[] = [
     period: '2025 10月',
     description: 'エンジニアカフェでRiverPodについてのハンズオン講座を開いた',
     icon: <Circle size={20} />,
+    tags: ['講座・登壇'],
   },
   {
     id: 20,
@@ -243,6 +266,7 @@ const experiences: Experience[] = [
     period: '2025 10月',
     description: 'Flutterのカンファレンスに参加',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 21,
@@ -251,6 +275,7 @@ const experiences: Experience[] = [
     period: '2025 12月',
     description: 'チャレキャラ2025に参加し、企業賞を獲得',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 22,
@@ -259,6 +284,7 @@ const experiences: Experience[] = [
     period: '2025 12月',
     description: '株式会社dipさんとのLT会を主催',
     icon: <Circle size={20} />,
+    tags: ['イベント'],
   },
   {
     id: 23,
@@ -267,8 +293,8 @@ const experiences: Experience[] = [
     period: '2026 1月',
     description: 'AIを使ったマッチングアプリを作成し、優秀賞を獲得',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
-
   {
     id: 24,
     title: 'Flutterの入門＋Liquid glass講座を開いた',
@@ -276,6 +302,7 @@ const experiences: Experience[] = [
     period: '2026 1月',
     description: 'Flutterの環境構築から入門の講座とliquid glassの簡単な講座を3時間開いた',
     icon: <Circle size={20} />,
+    tags: ['講座・登壇'],
   },
   {
     id: 25,
@@ -284,6 +311,7 @@ const experiences: Experience[] = [
     period: '2026 2月',
     description: 'ハッカソンで3人1組の連帯責任で「サボり」を防ぐ、運動習慣化監視アプリを作成した',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 26,
@@ -292,6 +320,7 @@ const experiences: Experience[] = [
     period: '2026 2月',
     description: 'ハッカソンでvscodeの拡張機能を使ってパチンコができるプロダクトを作成',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 27,
@@ -300,6 +329,7 @@ const experiences: Experience[] = [
     period: '2026 3月',
     description: 'CA Tech Dojoに参加し、1weekでのandroidアプリ開発インターンを行った。最優秀賞を獲得',
     icon: <Circle size={20} />,
+    tags: ['インターン'],
   },
   {
     id: 28,
@@ -308,6 +338,7 @@ const experiences: Experience[] = [
     period: '2026 3月',
     description: 'CyberAgentさんとの内製化ハッカソンに参加し、最優秀賞を獲得',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 29,
@@ -316,6 +347,7 @@ const experiences: Experience[] = [
     period: '2026 4月',
     description: '全国でのハッカソンイベントであるhack1の一ヶ月ハッカソンに参加した',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 30,
@@ -324,6 +356,7 @@ const experiences: Experience[] = [
     period: '2026 5月',
     description: 'DDDハッカソンに参加し、サイバーエージェント賞を獲得',
     icon: <Circle size={20} />,
+    tags: ['ハッカソン'],
   },
   {
     id: 31,
@@ -332,6 +365,7 @@ const experiences: Experience[] = [
     period: '2026 5月',
     description: 'Flutter webのハンズオン講座を開催',
     icon: <Circle size={20} />,
+    tags: ['講座・登壇'],
   },
   {
     id: 32,
@@ -340,14 +374,24 @@ const experiences: Experience[] = [
     period: '2026 6月',
     description: '株式会社dipさんとのAI-DLCのハンズオンを開催',
     icon: <Circle size={20} />,
+    tags: ['講座・登壇', 'イベント'],
   }
 
 ];
 
 const Profile: React.FC = () => {
+  const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
+
   const sortedExperiences = useMemo(
     () => experiences.slice().sort((a, b) => b.id - a.id),
     []
+  );
+
+  const filteredExperiences = useMemo(
+    () => selectedTag
+      ? sortedExperiences.filter((e) => e.tags.includes(selectedTag))
+      : sortedExperiences,
+    [sortedExperiences, selectedTag]
   );
 
   return (
@@ -518,16 +562,51 @@ const Profile: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-12 flex items-center gap-3 text-[var(--color-text)]">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-8 flex items-center gap-3 text-[var(--color-text)]">
               <Briefcase size={24} className="text-[var(--color-accent)]" />
               経歴紹介
             </h2>
+
+            {/* Tag filter bar */}
+            <div className="flex flex-wrap gap-2 mb-12">
+              <button
+                onClick={() => setSelectedTag(null)}
+                className={`px-4 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 ${
+                  selectedTag === null
+                    ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
+                    : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-text)]'
+                }`}
+              >
+                すべて
+              </button>
+              {allTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => setSelectedTag(tag)}
+                  className={`px-4 py-1.5 text-sm font-medium rounded-full border transition-all duration-200 ${
+                    selectedTag === tag
+                      ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
+                      : 'bg-[var(--color-surface)] text-[var(--color-text-muted)] border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-text)]'
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
 
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-[var(--color-border)]" />
 
-              {sortedExperiences.map((item, index) => (
+              <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedTag ?? 'all'}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+              {filteredExperiences.map((item, index) => (
                 <motion.div
                   key={item.id}
                   className={`relative mb-12 md:mb-16 ${
@@ -596,6 +675,8 @@ const Profile: React.FC = () => {
                   )}
                 </motion.div>
               ))}
+              </motion.div>
+              </AnimatePresence>
             </div>
           </motion.section>
         </div>
