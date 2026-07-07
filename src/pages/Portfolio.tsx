@@ -300,6 +300,63 @@ const projects: Project[] = [
         'ローカル daemon + Firebase RTDB フォールバックによるハイブリッドクラウド / Fail-safe 設計',
         'コミット数（青）と心拍数（赤）を重ね合わせ「熱狂」を紫で表現する、色覚多様性に配慮した viridis 系ヒートマップの可視化設計',
     ]
+  },
+  {
+    id: 21,
+    title: 'メン・トライアル',
+    description: '面接中の優勢・劣勢をリアルタイムで可視化するデスクトップアプリ。表情・音声・話し方・回答内容を解析し、エンタメ的な「戦闘」UIで面接状況を表示する。「面接が苦しい」という課題から着想し、客観的な優劣表示とエンタメ演出で面接の緊張を軽減することを目指した（Allo Hackathon 出展作品）。',
+    image: '/assets/images/men.png',
+    technologies: ['TypeScript', 'Node.js', 'Electron', 'React', 'MediaPipe', 'Meyda', 'Deepgram', 'Gemini'],
+    github: 'https://github.com/nicest414/allo_hackathon',
+    liveDemo: 'https://topaz.dev/projects/437e06728bd9074bb6cc',
+    role: [
+        '顔解析パイプラインの実装（MediaPipe Face Landmarker で468点のランドマークを抽出。UI描画60FPSに対し就活生6FPS・面接官4FPSで非同期解析し、動的顔クロッピングで安定した顔ポートレートを生成）',
+        '音声解析の実装（Web Audio API と Meyda でピッチ変動・発話速度・ポーズ割合を抽出し、理想的な発話速度からの偏差で「焦り」を検知）',
+        '音声認識・フィラー検出の実装（Deepgram / Gemini Live で音声認識し、「えっと」「あのー」などのフィラーを長い単語優先マッチングで検出。過去60秒をスライディングウィンドウで評価）',
+        'LLM評価の実装（Gemini で質問と回答の品質・論理性・説得力を評価。構造化出力で安定性を確保し、APIキーは Main Process で保護）',
+    ],
+    challenges: [
+        '質問・回答セッションの認識精度向上（初期の2.5秒沈黙判定から、面接官の話声で新セッション開始を判定する方式へ改善。相槌対策として一定時間の話し続きを同一セッションに統合）',
+        'レイテンシ対策（LLM評価の待機中も表情・声の焦り・フィラーをブラウザ完結で即時表示し、アニメーション演出で「戦闘感」を維持。セッションごとにLLMでスコアを補正）',
+        'セキュリティ設計（Renderer から APIキーへ直接アクセスできないよう、IPC経由で Main Process が処理する Renderer/Main 分離のサンドボックス設計）',
+        'スコア調整（良い/悪い面接を約10回繰り返し、各指標の重み調整を反復して体感と一致するスコアリングに調整）',
+    ],
+    learnings: [
+        '表情・音声・言語・LLM評価という複数の非同期解析を統合し、リアルタイムに1つの「優劣」へ束ねるマルチモーダルパイプラインの設計',
+        'ドメイン駆動設計（DDD）と Renderer/Main Process 分離による、セキュアで保守しやすい Electron アプリの構成',
+        'LLMの評価レイテンシをブラウザ完結の即時フィードバックで隠蔽し、体験を途切れさせない UX 設計',
+        '`LLM_FAKE=1` によるモック動作や `mise run judge` での単体検証など、ハッカソンでも高速に反復できる開発基盤づくり',
+    ]
+  },
+  {
+    id: 22,
+    title: 'レンタルスペース予約・決済プラットフォーム',
+    description: '兄が経営するレンタルスペース事業向けに、設計・開発・運用の全工程を一人で担当した独自の予約・決済プラットフォーム。スペースマーケット等の外部サイト経由リピーターを自社に誘導し、20〜35%の仲介手数料をStripe決済手数料3.6%のみに削減することを狙った受託開発。約26日間でMVPを本番リリースし、実運用中。WiFi→LINE友だち追加→ウェルカムクーポン→LINEログインで自社直接予約、という顧客獲得ファネルを技術で実現した。',
+    image: '/assets/images/reservation.png',
+    technologies: ['Go', 'Echo', 'Next.js', 'TypeScript', 'PostgreSQL', 'Stripe', 'LINE Login/Messaging API', 'Google Calendar API', 'OpenAPI', 'Zustand', 'Tailwind CSS', 'GCP Cloud Run', 'Neon', 'GitHub Actions'],
+    github: '',
+    liveDemo: '',
+    role: [
+        '要件定義（設計ドキュメント13ファイル・約150KB）からDB設計（24テーブル）、OpenAPI設計（1,005行）、バックエンド（Go 9,715行）、フロントエンド（TypeScript 5,709行）、テスト（2,843行）、CI/CD構築、本番デプロイ・運用まで全工程を一人で担当',
+        'フィーチャーファーストのクリーンアーキテクチャ（domain / usecase / handler / infra の4層）でGo + Echo APIを設計。依存性逆転により業務ロジックとDB・外部API実装を分離',
+        'Stripe Payment Intents による決済・自動返金・Webhook処理と、15分間の仮予約（hold）タイムアウトワーカーを実装',
+        'LINEログイン（OAuth2）、友だち追加時のウェルカムクーポン自動配布、予約確定LINE通知、Google Calendar双方向連携（他プラットフォーム予約の自動ブロック取り込み）を実装',
+        'HIDAMARI デザインシステム（オリジナルUIコンポーネント群）とNext.js App Routerによるレスポンシブなフロントエンド、管理画面（予約管理・手動予約・ブロック枠）を構築',
+    ],
+    challenges: [
+        '二重予約の完全防止（PostgreSQLのEXCLUDE制約 + btree_gistで、Race Conditionに関係なくDBレベルで同一スペース・同一時間帯の重複予約をINSERT不可能に）',
+        '決済の冪等性設計（PaymentIntentの冪等な作成・Webhookイベントの重複排除・返金の冪等キーの3層で、二重クリックやネットワーク再送による二重課金を防止）',
+        'タイムゾーン問題（JST/UTCのずれで営業時間判定が狂う不具合を、業務ロジックをAsia/Tokyoで評価する方針に統一し、CIは TZ=UTC で実行して検出）',
+        '本番固有トラブルの解決（Stripe Webhookのバージョン不一致、NeonのPgBouncer互換によるpgxのProtocolモード切替、Cloud Runのビルドarg環境変数など、ローカルで再現しない問題への対処）',
+        'Google Calendar連携の設計変更（単一共有カレンダーではスペースを判別できず、スペースごとに独立カレンダーを割り当てる方式へ全面再設計・バックフィル）',
+    ],
+    learnings: [
+        'データ整合性はアプリケーションコードではなくDB制約で守るという設計原則（EXCLUDE制約による整合性保証）',
+        '冪等性はスキーマ設計段階から織り込む必要があり、あとから追加できないこと',
+        'スキーマ駆動開発（OpenAPIからフロントの型を自動生成）により、一人開発でもフロント・バックの認識齟齬をコンパイル時に検出できること',
+        '「何を作らないか」を絞るMVPのスコープ判断こそが、26日間で本番リリースに到達できた最大の要因だったこと',
+        '技術選定はビジネス要件（手数料削減というROI・リピーターのフリクション最小化）から逆算するという視点',
+    ]
   }
   
   
