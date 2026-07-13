@@ -331,13 +331,13 @@ const projects: Project[] = [
   {
     id: 22,
     title: 'レンタルスペース予約・決済プラットフォーム',
-    description: '兄が経営するレンタルスペース事業向けに、設計・開発・運用の全工程を一人で担当した独自の予約・決済プラットフォーム。スペースマーケット等の外部サイト経由リピーターを自社に誘導し、20〜35%の仲介手数料をStripe決済手数料3.6%のみに削減することを狙った受託開発。約26日間でMVPを本番リリースし、実運用中。WiFi→LINE友だち追加→ウェルカムクーポン→LINEログインで自社直接予約、という顧客獲得ファネルを技術で実現した。',
+    description: '兄が経営するレンタルスペース事業向けに、設計・開発・運用の全工程を一人で担当した独自の予約・決済プラットフォーム。スペースマーケット等の外部サイト経由リピーターを自社に誘導し、20〜35%の仲介手数料をStripe決済手数料3.6%のみに削減することを狙った受託開発。MVPを本番リリースし、実運用中。WiFi→LINE友だち追加→ウェルカムクーポン→LINEログインで自社直接予約、という顧客獲得ファネルを技術で実現した。',
     image: '/assets/images/reservation.png',
     technologies: ['Go', 'Echo', 'Next.js', 'TypeScript', 'PostgreSQL', 'Stripe', 'LINE Login/Messaging API', 'Google Calendar API', 'OpenAPI', 'Zustand', 'Tailwind CSS', 'GCP Cloud Run', 'Neon', 'GitHub Actions'],
     github: '',
     liveDemo: '',
     role: [
-        '要件定義（設計ドキュメント13ファイル・約150KB）からDB設計（24テーブル）、OpenAPI設計（1,005行）、バックエンド（Go 9,715行）、フロントエンド（TypeScript 5,709行）、テスト（2,843行）、CI/CD構築、本番デプロイ・運用まで全工程を一人で担当',
+        '要件定義からDB設計（24テーブル）、OpenAPI設計、バックエンド、フロントエンド、テスト、CI/CD構築、本番デプロイ・運用まで全工程を一人で担当',
         'フィーチャーファーストのクリーンアーキテクチャ（domain / usecase / handler / infra の4層）でGo + Echo APIを設計。依存性逆転により業務ロジックとDB・外部API実装を分離',
         'Stripe Payment Intents による決済・自動返金・Webhook処理と、15分間の仮予約（hold）タイムアウトワーカーを実装',
         'LINEログイン（OAuth2）、友だち追加時のウェルカムクーポン自動配布、予約確定LINE通知、Google Calendar双方向連携（他プラットフォーム予約の自動ブロック取り込み）を実装',
