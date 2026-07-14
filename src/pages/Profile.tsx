@@ -76,14 +76,14 @@ const internships: Internship[] = [
     technologies: ['React', 'TypeScript', 'echo', 'Go','PostgreSQL','Neon', 'Docker', 'Cloud Run'],
     image: '/assets/images/truenest.png',
   },
-  {
-    company: '株式会社サイバーエージェント',
-    period: '2026年8月',
-    role: 'CA Job Lite - Flutter エンジニア（2week インターン）参加予定',
-    description: '',
-    technologies: ['Flutter'],
-    image: '/assets/images/cainternflutter.png',
-  }
+  // {
+  //   company: '株式会社サイバーエージェント',
+  //   period: '2026年8月',
+  //   role: 'CA Job Lite - Flutter エンジニア（2week インターン）参加予定',
+  //   description: '',
+  //   technologies: ['Flutter'],
+  //   image: '/assets/images/cainternflutter.png',
+  // }
   
 ];
 
