@@ -79,7 +79,7 @@ const internships: Internship[] = [
   {
     company: '株式会社サイバーエージェント',
     period: '2026年8月',
-    role: 'CA Job Lite - Flutter エンジニア（2week インターン',
+    role: 'CA Job Lite - Flutter エンジニア（2week インターン)',
     description: '',
     technologies: ['Flutter'],
     image: '/assets/images/cainternflutter.png',
@@ -90,7 +90,7 @@ const internships: Internship[] = [
     role: 'Dive into MIXI インターン androidエンジニア',
     description: '',
     technologies: ['Android'],
-    image: '',
+    image: '/assets/images/mixi.webp',
   }
   
 ];
