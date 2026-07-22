@@ -32,6 +32,7 @@ const Navigation: React.FC = () => {
     { path: '/', label: 'Home' },
     { path: '/profile', label: 'Profile' },
     { path: '/portfolio', label: 'Works' },
+    { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }
   ];
 
