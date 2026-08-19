@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '../components/PageTransition';
-import { Code, Briefcase, Circle, Trophy, Building2 } from 'lucide-react';
+import { Code, Briefcase, Circle, Trophy, Building2, ArrowRight, X } from 'lucide-react';
 
 type Tag = 'ハッカソン' | 'サークル' | 'イベント' | '個人開発' | '講座・登壇' | 'インターン';
 
@@ -57,6 +57,16 @@ type Internship = {
   description: string;
   technologies: string[];
   image?: string;
+  // ↓ 詳細（モーダルに表示。埋めた会社だけ「詳細を見る」が出る）
+  detail?: {
+    overview?: string;        // どんなインターンか
+    challenge?: string;       // 課題・お題
+    work?: string[];          // やったこと（箇条書き）
+    techReason?: string;      // 技術選定の理由
+    outcome?: string;         // 成果（受賞・数値・完成物）
+    learned?: string;         // 学んだこと
+    links?: { label: string; url: string }[];
+  };
 };
 
 const internships: Internship[] = [
@@ -64,9 +74,33 @@ const internships: Internship[] = [
     company: '株式会社サイバーエージェント',
     period: '2026年3月',
     role: 'CA Tech Dojo - Android エンジニア（1week インターン）',
-    description: '1週間でAndroidアプリを開発するインターンに参加。Clean Architecture + MVVM に基づく設計と実装を行い、最優秀賞を獲得。',
-    technologies: ['Kotlin', 'Jetpack Compose', 'Room', 'Hilt'],
+    description: 'Android開発をテーマに、1週間で1人でアプリを開発・リリースできるようになることを目指す育成型インターン。設計を第一に据え、AIを活用した開発スタイルを実践し、最優秀賞を獲得。',
+    technologies: ['Kotlin', 'Jetpack Compose', 'Room', 'Qiita API', 'Gemini API'],
     image: '/assets/images/cainternandroid.png',
+    detail: {
+      overview:
+        'サイバーエージェント主催の学生向け育成型インターン。「Android開発をテーマに、1週間でアプリ開発の基礎スキルを身につける」ことが目的で、全体ゴールは「1人でアプリを開発しリリースできるようになる」こと。',
+      challenge:
+        'お題は「コンテンツポータルアプリ」。ここから、技術記事の「読んだつもり」をなくす“理解完了アプリ”を企画・開発した。',
+      work: [
+        'ポータル画面：Qiita API からトレンド記事を取得して一覧表示',
+        '積読リスト画面：Gemini API で記事を要約し、積んだ記事を管理',
+        '消化フロー：AI が記事内容に即した問いを生成し、理解度をチェック',
+        '完了リスト画面：消化し切った記事を蓄積',
+        'データ管理は Room + Repository 層、状態管理は Flow、ViewModel 中心のアーキテクチャで構築',
+      ],
+      techReason:
+        '「設計を第一に考える」方針で、公式のベストプラクティスを参考にアーキテクチャを構築。AI活用では「テスト駆動AI開発」「仕様駆動開発」を取り入れ、AIに任せる部分と自分が責任を持つ部分を明確に分けて進めた。',
+      outcome: '参加者の中で最優秀賞を獲得。',
+      learned:
+        'ネイティブアプリ開発ならではの考え方や設計を学べた。Figma MCP を使ったUI開発では開発のスピードと精度が大きく変わる可能性を感じ、AIを活用したこれからの開発スタイルを考える良いきっかけになった。',
+      links: [
+        {
+          label: '参加記（Qiita）',
+          url: 'https://qiita.com/oto1720/items/910598fe80cf49739317',
+        },
+      ],
+    },
   },
   {
     company: 'TrueNest',
@@ -75,6 +109,24 @@ const internships: Internship[] = [
     description: 'レンタルスペース事業を行う兄の会社でのレンタルスペースの予約サイトのシステム作りを行った。要件定義、設計、実装、テスト、デプロイ、運用までを担当。',
     technologies: ['React', 'TypeScript', 'echo', 'Go','PostgreSQL','Neon', 'Docker', 'Cloud Run'],
     image: '/assets/images/truenest.png',
+    detail: {
+      overview:
+        'レンタルスペース事業を営む兄の会社から業務委託を受け、予約サイトを個人で一気通貫で開発。要件定義から運用までを一人で担当した。',
+      challenge:
+        '実際に事業で使う予約システムを、実運用に耐える品質・コストで構築する必要があった。空き状況の管理や予約フローの整合性が要件の中心。',
+      work: [
+        '事業側とヒアリングして要件定義・画面設計を実施',
+        'フロントを React + TypeScript、バックエンドを Go（echo）で REST API として実装',
+        'PostgreSQL（Neon）でデータ設計、予約・空き状況を管理',
+        'Docker でコンテナ化し、Cloud Run にデプロイして運用まで担当',
+      ],
+      techReason:
+        'Go（echo）は軽量で起動が速く Cloud Run のスケール・課金と相性が良いため採用。DB はサーバーレスでコストを抑えられる Neon を選び、個人運用でも管理負荷を最小化した。',
+      // TODO: 稼働実績・予約件数・工数削減など、あれば数値を追記してください
+      outcome: '要件定義から実装・デプロイ・運用まで一人で完了し、実事業で稼働するシステムを構築した。',
+      learned:
+        '個人で全工程を担うことで、技術選定をコスト・運用まで含めて判断する力がついた。事業要件を仕様に落とし込む難しさも学んだ。',
+    },
   },
   {
     company: '株式会社サイバーエージェント',
@@ -389,6 +441,22 @@ const experiences: Experience[] = [
 
 const Profile: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<Tag | null>(null);
+  const [openIntern, setOpenIntern] = useState<Internship | null>(null);
+
+  // モーダル表示中は背景スクロールを止め、Escで閉じる
+  React.useEffect(() => {
+    if (!openIntern) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenIntern(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [openIntern]);
 
   const sortedExperiences = useMemo(
     () => experiences.slice().sort((a, b) => b.id - a.id),
@@ -522,6 +590,16 @@ const Profile: React.FC = () => {
                         </span>
                       ))}
                     </div>
+
+                    {intern.detail && (
+                      <button
+                        onClick={() => setOpenIntern(intern)}
+                        className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:gap-2 transition-all duration-200"
+                      >
+                        詳細を見る
+                        <ArrowRight size={16} />
+                      </button>
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -689,8 +767,139 @@ const Profile: React.FC = () => {
           </motion.section>
         </div>
       </div>
+
+      {/* Internship detail modal */}
+      <AnimatePresence>
+        {openIntern && openIntern.detail && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 md:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setOpenIntern(null)}
+            />
+
+            {/* Panel */}
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              className="relative z-10 w-full max-w-2xl my-auto bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl shadow-2xl overflow-hidden"
+              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 20 }}
+              transition={{ duration: 0.25 }}
+            >
+              <button
+                onClick={() => setOpenIntern(null)}
+                aria-label="閉じる"
+                className="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--color-bg)]/80 border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+              >
+                <X size={18} />
+              </button>
+
+              {openIntern.image && (
+                <img
+                  src={openIntern.image}
+                  alt={openIntern.company}
+                  className="w-full h-48 md:h-56 object-cover"
+                />
+              )}
+
+              <div className="p-6 md:p-8">
+                <div className="flex items-center justify-between gap-3 mb-1">
+                  <h3 className="text-xl md:text-2xl font-bold text-[var(--color-text)]">
+                    {openIntern.company}
+                  </h3>
+                  <span className="text-xs text-[var(--color-accent)] font-medium whitespace-nowrap">
+                    {openIntern.period}
+                  </span>
+                </div>
+                <p className="text-sm font-medium text-[var(--color-text-muted)] mb-5">
+                  {openIntern.role}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {openIntern.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 text-xs bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="space-y-5">
+                  {openIntern.detail.overview && (
+                    <DetailBlock label="概要" text={openIntern.detail.overview} />
+                  )}
+                  {openIntern.detail.challenge && (
+                    <DetailBlock label="課題・お題" text={openIntern.detail.challenge} />
+                  )}
+                  {openIntern.detail.work && openIntern.detail.work.length > 0 && (
+                    <div>
+                      <h4 className="text-sm font-semibold text-[var(--color-accent)] mb-2">
+                        やったこと
+                      </h4>
+                      <ul className="space-y-1.5">
+                        {openIntern.detail.work.map((w, i) => (
+                          <li
+                            key={i}
+                            className="flex gap-2 text-sm text-[var(--color-text)] leading-relaxed"
+                          >
+                            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
+                            <span>{w}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {openIntern.detail.techReason && (
+                    <DetailBlock label="技術選定の理由" text={openIntern.detail.techReason} />
+                  )}
+                  {openIntern.detail.outcome && (
+                    <DetailBlock label="成果" text={openIntern.detail.outcome} />
+                  )}
+                  {openIntern.detail.learned && (
+                    <DetailBlock label="学んだこと" text={openIntern.detail.learned} />
+                  )}
+
+                  {openIntern.detail.links && openIntern.detail.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {openIntern.detail.links.map((l) => (
+                        <a
+                          key={l.url}
+                          href={l.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline"
+                        >
+                          {l.label}
+                          <ArrowRight size={14} />
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </PageTransition>
   );
 };
+
+const DetailBlock: React.FC<{ label: string; text: string }> = ({ label, text }) => (
+  <div>
+    <h4 className="text-sm font-semibold text-[var(--color-accent)] mb-1.5">{label}</h4>
+    <p className="text-sm text-[var(--color-text)] leading-relaxed whitespace-pre-line">{text}</p>
+  </div>
+);
 
 export default Profile;
