@@ -12,6 +12,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Talks = lazy(() => import('./pages/Talks'));
 const Contact = lazy(() => import('./pages/Contact'));
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/talks" element={<Talks />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </AnimatePresence>
